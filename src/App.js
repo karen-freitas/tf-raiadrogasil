@@ -1,19 +1,5 @@
-// import Button from '@material-ui/core/Button';
-
-
-
-// export function App() {
-//   return (
-//     <div className="App">
-//       {/* <Button variant="primary">Primary</Button> */}
-//       <Button variant="outlined" color="primary">
-//   TESTE
-// </Button>
-//     </div>
-//   );
-// }
-
 import * as React from 'react';
+import BasicModal from './components/modals'
 import { DataGrid } from '@material-ui/data-grid';
 
 const columns = [
@@ -44,8 +30,7 @@ const columns = [
     sortable: false,
     width: 160,
     valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
+      `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''
       }`,
   },
 ];
@@ -64,15 +49,20 @@ const rows = [
 
 export function App() {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    <>
+      <BasicModal />
+      <div style={{ height: 400, width: '100%' }}>
+
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+
+      </div>
+    </>
   );
 }
 
