@@ -12,9 +12,10 @@ export default function FormPropsTextFields({ label, type, name, value, onChange
             autoComplete="off"
         >
             <div>
-                <TextField 
-                    required 
+                <TextField
+                    required
                     id={name}
+                    label={label}
                     name={name}
                     className={className ? className : "input-standard"}
                     type={type}
@@ -22,33 +23,7 @@ export default function FormPropsTextFields({ label, type, name, value, onChange
                     onChange={onChange}
                 />
             </div>
-     
+
         </Box>
     );
 }
-
-
-// import React from 'react';
-// import './input.css';
-
-// const Input = ({ label, type, name, value, onChange, className, placeholder }) => {
-//     return (
-//         <div className='input-container'>
-//             <label htmlFor={name} className='label'>
-//                 {label}
-//             </label>
-//             <input
-//                 id={name}
-//                 name={name}
-//                 className={className ? className : "input-standard"}
-//                 placeholder={placeholder}
-//                 type={type}
-//                 value={value}
-//                 onChange={onChange}
-//             />
-//         </div>
-//     );
-// }
-
-// export default Input;
-
