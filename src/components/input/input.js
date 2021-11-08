@@ -15,6 +15,7 @@ export default function FormPropsTextFields({ label, type, name, value, onChange
                 <TextField 
                     required 
                     id={name}
+                    label
                     name={name}
                     className={className ? className : "input-standard"}
                     type={type}
