@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {registerEmployee} from '../src/services/firebase'
+// import {registerEmployee} from '../src/services/firebase'
 
 import BasicModal from './components/modals/modals';
 import FormPropsTextFields from './components/input/input';
