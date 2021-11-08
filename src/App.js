@@ -1,6 +1,8 @@
 import * as React from 'react';
-import BasicModal from './components/modals'
 import { DataGrid } from '@material-ui/data-grid';
+import BasicModal from './components/modals/modals';
+import FormPropsTextFields from './components/input/input';
+
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -50,7 +52,12 @@ const rows = [
 export function App() {
   return (
     <>
-      <BasicModal />
+      <BasicModal>
+        <FormPropsTextFields id="name" name="name" label="Nome" className="" />
+        <FormPropsTextFields id="last-name" name="last-name" label="Sobrenome" className="" />
+        <FormPropsTextFields id="email" name="email" label="E-mail" className="" />
+        <FormPropsTextFields id="phone" name="phone" label="Telefone" className="" />
+      </BasicModal>
       <div style={{ height: 400, width: '100%' }}>
 
         <DataGrid
@@ -60,7 +67,7 @@ export function App() {
           checkboxSelection
           disableSelectionOnClick
         />
-
+      
       </div>
     </>
   );
