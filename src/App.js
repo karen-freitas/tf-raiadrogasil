@@ -1,5 +1,5 @@
 import * as React from 'react';
-import BasicModal from './components/modals'
+import BasicModal from './components/modals/modals'
 import { DataGrid } from '@material-ui/data-grid';
 
 const columns = [
