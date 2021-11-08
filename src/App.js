@@ -1,20 +1,8 @@
-// import Button from '@material-ui/core/Button';
-
-
-
-// export function App() {
-//   return (
-//     <div className="App">
-//       {/* <Button variant="primary">Primary</Button> */}
-//       <Button variant="outlined" color="primary">
-//   TESTE
-// </Button>
-//     </div>
-//   );
-// }
-
 import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
+import BasicModal from './components/modals/modals';
+import FormPropsTextFields from './components/input/input';
+
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -44,8 +32,7 @@ const columns = [
     sortable: false,
     width: 160,
     valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
+      `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''
       }`,
   },
 ];
@@ -64,15 +51,25 @@ const rows = [
 
 export function App() {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    <>
+      <BasicModal>
+        <FormPropsTextFields id="name" name="name" label="Nome" className="" />
+        <FormPropsTextFields id="last-name" name="last-name" label="Sobrenome" className="" />
+        <FormPropsTextFields id="email" name="email" label="E-mail" className="" />
+        <FormPropsTextFields id="phone" name="phone" label="Telefone" className="" />
+      </BasicModal>
+      <div style={{ height: 400, width: '100%' }}>
+
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      
+      </div>
+    </>
   );
 }
 
