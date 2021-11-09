@@ -6,10 +6,12 @@
 
 :root {
   --white: #E5E5E5;
+  --light-grey:#F2F2F2;
   --dark-green: #285035;
   --medium-green: #187330;
   --light-green: #D4DDCE;
   --grey: #404040;
+  
   
 }
 
@@ -35,6 +37,9 @@ aside{
 
 main{
   width:75vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 
  
 }
