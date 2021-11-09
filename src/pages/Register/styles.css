@@ -1,0 +1,12 @@
+.form-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  margin: 5rem;
+}
+
+.input {
+  width: 3rem;
+}

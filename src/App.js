@@ -7,7 +7,7 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>testando</h1>
+        <h1>Navbar</h1>
       </header>
       <main>
         <Routes>
