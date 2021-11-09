@@ -9,14 +9,20 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>testando</h1>
+        <h1>Header</h1>
       </header>
+      <section className="page-container">
+        <aside>
+          Sidebar
+        </aside>
+
       <main>
         <Routes>
           <Route path="/" element={<ListEmployees />} />
           <Route path="/cadastro" element={<Register />} />
         </Routes>
       </main>
+      </section>
     </>
   );
 }

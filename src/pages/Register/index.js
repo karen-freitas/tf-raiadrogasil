@@ -1,12 +1,11 @@
 import React from 'react';
-
-import BasicModal from '../../components/modals/modals';
 import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 
-export default function Register() {
+import { registerEmployee, deleteEmployee } from '../../services/firebase';
 
+export default function Register() {
   const [values, setValues] = useState({
     name: '',
     lastName: '',
@@ -21,40 +20,44 @@ export default function Register() {
       [name]: value,
     });
   };
- 
+
+  const register = () => {
+    registerEmployee(values)
+      .then((data) => console.log(data))
+      .catch(console.log('erro'));
+  };
+
   return (
     <>
-      <BasicModal>
-        <FormPropsTextFields 
-          id="name"
-          name="name"
-          label="Nome" 
-          className="" 
-          onChange={handleChange}
-        />
-        <FormPropsTextFields
-          id="last-name" 
-          name="lastName" 
-          label="Sobrenome" 
-          className="" 
-          onChange={handleChange}
-         />
-        <FormPropsTextFields 
-          id="email" 
-          name="email" 
-          label="E-mail" 
-          className="" 
-          onChange={handleChange}
-        />
-        <FormPropsTextFields 
-          id="phone" 
-          name="phone" 
-          label="Telefone" 
-          className="" 
-          onChange={handleChange}
-        />
-      <Button>Cadastrar</Button>
-      </BasicModal>
+      <FormPropsTextFields
+        id="name"
+        name="name"
+        label="Nome"
+        className=""
+        onChange={handleChange}
+      />
+      <FormPropsTextFields
+        id="last-name"
+        name="lastName"
+        label="Sobrenome"
+        className=""
+        onChange={handleChange}
+      />
+      <FormPropsTextFields
+        id="email"
+        name="email"
+        label="E-mail"
+        className=""
+        onChange={handleChange}
+      />
+      <FormPropsTextFields
+        id="phone"
+        name="phone"
+        label="Telefone"
+        className=""
+        onChange={handleChange}
+      />
+      <Button onClick={()=>register()}>Cadastrar</Button>
     </>
   );
 }
