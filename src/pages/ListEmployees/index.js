@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import { listEmployee } from '../../services/firebase';
+import { listEmployee, deleteEmployee } from '../../services/firebase';
 import TesteProfile from '../../components/TesteProfile'
 
 import Paper from '@mui/material/Paper';
@@ -19,94 +19,20 @@ export default function ListEmployees() {
   const[activeProfile, setActiveProfile] = useState(false)
   const [employeeSelected, setEmployeeSelected] = useState({})
 
-  const mockRows = [
-    {
-      name: 'mock1',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"5265"
-    },
-    {
-      name: 'mock2',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"52h5"
-    },
-    {
-      name: 'mock3',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"56fd5"
-    },
-    {
-      name: 'mock4',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"565"
-    },
-    {
-      name: 'mock5',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"56r5"
-    },
-    {
-      name: 'mock6',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"526"
-    },
-    {
-      name: 'mock7',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"265"
-    },
-    {
-      name: 'mock8',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"65"
-    },
-    {
-      name: 'mock9',
-      lastName: 'mock',
-      email: 'mock',
-      phone: 'mock',
-      details: 'Mais',
-      id:"25"
-    },
-   
-  ];
 
-  // useEffect(() => {
-  //   listEmployee().then((list) => {
-  //     const newEmployees = [];
-  //     const newRows = []
-  //     list.forEach((doc) => {
-  //       newEmployees.push({ ...doc.data(), id: doc.id });
-  //       newRows.push({ ...doc.data(), id: doc.id, details:"Mais" })
-  //     });
-  //     setEmployees(newEmployees);
-  //     setRows(newRows)
-  //   });
-  // }, []);
+  useEffect(() => {
+    listEmployee().then((list) => {
+      const newEmployees = [];
+      const newRows = []
+      list.forEach((doc) => {
+        newEmployees.push({ ...doc.data(), id: doc.id });
+        newRows.push({ ...doc.data(), id: doc.id, details:"Mais" })
+      });
+      setEmployees(newEmployees);
+      setRows(newRows)
+      console.log(newEmployees)
+    });
+  }, []);
 
   const columns = [
     
@@ -148,7 +74,7 @@ export default function ListEmployees() {
   ];
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -162,7 +88,7 @@ export default function ListEmployees() {
   const handleClickEmployee = (event) => {
     if(event.target.getAttribute('value')==="Mais"){
       const id = event.target.getAttribute('id')
-      const employee = mockRows.find((employee => employee.id===id))
+      const employee = rows.find((employee => employee.id===id))
       console.log(employee)
       setActiveProfile(true)
       setEmployeeSelected(employee)
@@ -174,9 +100,17 @@ export default function ListEmployees() {
     setActiveProfile(false)
   }
 
+  const handleDeleteEmployee = (employee) => {
+    deleteEmployee(employee.id)
+    const newArray = [...rows]
+    setRows(newArray.filter(data=>data.id!==employee.id))
+    setActiveProfile(false)
+  }
+    
+
   return (
     <>
-    {activeProfile?<TesteProfile data={employeeSelected} onClick={handleCloseProfile}/>:
+    {activeProfile?<TesteProfile data={employeeSelected} onClick={handleCloseProfile} deleteEmployee={()=>handleDeleteEmployee(employeeSelected)}/>:
     (<Paper sx={{ width: '100%' }}>
     <TableContainer sx={{ maxHeight: 440 }}>
       <Table stickyHeader aria-label="sticky table">
@@ -201,7 +135,7 @@ export default function ListEmployees() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {mockRows
+          {rows
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row) => {
               return (
@@ -215,6 +149,7 @@ export default function ListEmployees() {
                         align={column.align}
                         value={value}
                         onClick={handleClickEmployee}
+                        className={column.field}
                         >
                         {column.format && typeof value === 'number'
                           ? column.format(value)
@@ -229,9 +164,9 @@ export default function ListEmployees() {
       </Table>
     </TableContainer>
     <TablePagination
-      rowsPerPageOptions={[10, 25, 100]}
+      rowsPerPageOptions={[6, 10, 25, 100]}
       component="div"
-      count={mockRows.length}
+      count={rows.length}
       rowsPerPage={rowsPerPage}
       page={page}
       onPageChange={handleChangePage}
@@ -242,3 +177,36 @@ export default function ListEmployees() {
   </>
   );
 }
+
+
+
+// import React from 'react';
+// import { Formik, Field, Form } from 'formik';
+
+
+
+
+// function Cep() {
+//   function onSubmit(values) {
+//     console.log('SUBMIT', values);
+//   }
+
+//   return (
+//     <div className="cep">
+//       <Formik
+//         render={({ isValid }) => (
+//           <Form>
+//             <div className="form-control-group">
+//               <label>Cep</label>
+//               <Field name="cep" type="text" />
+//             </div>
+
+//             <button type="submit" disabled={!isValid}>Enviar</button>
+//           </Form>
+//         )}
+//       />
+//     </div>
+//   );
+// }
+
+// export default Cep;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const TesteProfile = ({ data, onClick}) => {
+const TesteProfile = ({ data, onClick, deleteEmployee}) => {
     return (
       <>
         <h1>{data.name}</h1>
@@ -10,6 +10,7 @@ const TesteProfile = ({ data, onClick}) => {
         <h1>{data.phone}</h1>
 
       <button onClick={onClick}>fechar</button>
+      <button onClick={deleteEmployee}>Deletar</button>
       </>
     );
 };
