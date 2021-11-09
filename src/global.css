@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #E5E5E5;
+  --dark-green: #285035;
+  --medium-green: #187330;
+  --light-green: #D4DDCE;
+  --grey: #404040;
+  
+}
+
+
+body {
+  font-family: "Roboto", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--light-green);
+  
+
+}
+
+.page-container{
+  display:flex;
+  width:100vw;
+
+}
+
+aside{
+  width:25vw;
+}
+
+.main{
+  width:85vw;
+
+ 
+}
+
