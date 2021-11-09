@@ -3,13 +3,15 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: baseline;
   margin-top: 4rem;
+  margin-left: 7rem;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
   width: 20rem;
+  background: #ffffff;
 }
 
 .css-1cko8mj {

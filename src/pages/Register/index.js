@@ -12,6 +12,9 @@ export default function Register() {
     lastName: '',
     email: '',
     phone: '',
+    address: '',
+    cep: '',
+    role: '',
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -74,6 +77,36 @@ export default function Register() {
           type="text"
           error={values.phone === ""}
           helperText={values.phone === "" ? 'Por favor, preencha com o seu telefone' : ""}
+        />
+        <FormPropsTextFields
+          id="address"
+          name="address"
+          label="Endereço"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.address === ""}
+          helperText={values.address === "" ? 'Por favor, preencha com o seu endereço' : ""}
+        />
+        <FormPropsTextFields
+          id="cep"
+          name="cep"
+          label="CEP"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.cep === ""}
+          helperText={values.cep === "" ? 'Por favor, preencha com o seu CEP' : ""}
+        />
+        <FormPropsTextFields
+          id="role"
+          name="role"
+          label="Função"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.role === ""}
+          helperText={values.role === "" ? 'Por favor, preencha com o sua função' : ""}
         />
       </div>
       <Button onClick={() => register()}>Cadastrar</Button>
