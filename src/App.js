@@ -1,62 +1,20 @@
-import * as React from 'react';
-// import {registerEmployee} from '../src/services/firebase'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import ListEmployees from './pages/ListEmployees';
+import Register from './pages/Register';
 
-import BasicModal from './components/modals/modals';
-import FormPropsTextFields from './components/input/input';
-import { useState } from 'react';
-import { Button } from '@mui/material';
-
-export function App() {
-
-  const [values, setValues] = useState({
-    name: '',
-    lastName: '',
-    email: '',
-    phone: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
- 
+export default function App() {
   return (
     <>
-      <BasicModal>
-        <FormPropsTextFields 
-          id="name"
-          name="name"
-          label="Nome" 
-          className="" 
-          onChange={handleChange}
-        />
-        <FormPropsTextFields
-          id="last-name" 
-          name="lastName" 
-          label="Sobrenome" 
-          className="" 
-          onChange={handleChange}
-         />
-        <FormPropsTextFields 
-          id="email" 
-          name="email" 
-          label="E-mail" 
-          className="" 
-          onChange={handleChange}
-        />
-        <FormPropsTextFields 
-          id="phone" 
-          name="phone" 
-          label="Telefone" 
-          className="" 
-          onChange={handleChange}
-        />
-      <Button>Cadastrar</Button>
-      </BasicModal>
+      <header>
+        <h1>testando</h1>
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<ListEmployees/>} />
+          <Route path="/cadastro" element={<Register/>} />
+        </Routes>
+      </main>
     </>
   );
 }
-
