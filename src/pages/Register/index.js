@@ -3,8 +3,12 @@ import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import BasicModal from '../../components/modals/modals';
-import { registerEmployee, deleteEmployee } from '../../services/firebase';
+
+
 import Header from '../../components/Header/Header.js';
+
+import { registerEmployee } from '../../services/firebase';
+
 
 export default function Register() {
   const [values, setValues] = useState({
