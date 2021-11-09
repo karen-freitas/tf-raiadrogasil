@@ -4,6 +4,7 @@ import Sidebar from './components/sidebar/sidebar.js';
 import ListEmployees from './pages/ListEmployees/index.js';
 import Register from './pages/Register/index';
 import ContainerList from './components/ContainerList/ContainerList.js'
+import Header from './components/Header/Header.js'
 
 export default function App() {
   return (

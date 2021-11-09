@@ -2,6 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { listEmployee } from '../../services/firebase';
+import Header from '../../components/Header/Header.js';
+
+
 
 export default function ListEmployees() {
   const [employees, setEmployees] = useState([]);
@@ -51,8 +54,11 @@ export default function ListEmployees() {
 
   return (
     <>
-    
-      <div style={{ height: 400, width: '80%' }}>
+      <Header
+       name="Colaboradores"
+       
+      />
+      <div style={{ height: 400, width: '100%' }}>
         <DataGrid
           rows={employees}
           columns={columns}
@@ -65,8 +71,6 @@ export default function ListEmployees() {
     </>
   );
 }
-
-
 
 // import React from 'react';
 // import { Formik, Field, Form } from 'formik';
