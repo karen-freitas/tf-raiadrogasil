@@ -65,3 +65,36 @@ export default function ListEmployees() {
     </>
   );
 }
+
+
+
+// import React from 'react';
+// import { Formik, Field, Form } from 'formik';
+
+
+
+
+// function Cep() {
+//   function onSubmit(values) {
+//     console.log('SUBMIT', values);
+//   }
+
+//   return (
+//     <div className="cep">
+//       <Formik
+//         render={({ isValid }) => (
+//           <Form>
+//             <div className="form-control-group">
+//               <label>Cep</label>
+//               <Field name="cep" type="text" />
+//             </div>
+
+//             <button type="submit" disabled={!isValid}>Enviar</button>
+//           </Form>
+//         )}
+//       />
+//     </div>
+//   );
+// }
+
+// export default Cep;
