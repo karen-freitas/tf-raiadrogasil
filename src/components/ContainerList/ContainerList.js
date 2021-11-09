@@ -6,7 +6,6 @@ import '../../styles/containerList.css';
 const ContainerList = ({ children }) => {
   return (
     <Box className="ContainerList">
-     
       {children}
     </Box>
   );
