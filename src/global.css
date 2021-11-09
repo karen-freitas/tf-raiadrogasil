@@ -36,7 +36,7 @@ aside{
 }
 
 main{
-  width:75vw;
+  width:100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
