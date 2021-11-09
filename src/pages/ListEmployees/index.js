@@ -33,11 +33,22 @@ export default function ListEmployees() {
 
   const useStyles = makeStyles({
     root: {
-      'background-color': "#285035",
-      'color': 'white'
-
+      'background-color': '#285035',
+      color: 'white',
     },
+    row: {
+      color: '#404040',
+    },
+    container:{
+      
+      'margin-top':'0',
+      padding:'1rem',
+      border:'none',
+      'box-shadow':'none',
+      'background-color': '#F2F2F2 ',
+    }
   });
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -58,7 +69,7 @@ export default function ListEmployees() {
     {
       field: 'name',
       headerName: 'Nome',
-      minWidth: 100,
+      minWidth: 150,
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
@@ -86,14 +97,14 @@ export default function ListEmployees() {
     {
       field: 'details',
       headerName: 'Ações',
-      minWidth: 150,
+      minWidth: 100,
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
   ];
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -132,20 +143,20 @@ export default function ListEmployees() {
           data={employeeSelected}
           onClick={handleCloseProfile}
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
+          
         />
       ) : (
-        <Paper sx={{ width: '100%' }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
+        <Paper sx={{ width: '95%' }} className={classes.container}>
+          <TableContainer sx={{ maxHeight: 500 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 {columns.map((column) => (
                   <TableCell
                     key={column.field}
                     align={column.align}
-                    style={{ top: 57, minWidth: column.minWidth }} 
+                    style={{ top: 57, minWidth: column.minWidth }}
                     className={classes.root}>
                     {column.headerName}
-                    
                   </TableCell>
                 ))}
               </TableHead>
@@ -168,7 +179,7 @@ export default function ListEmployees() {
                               align={column.align}
                               value={value}
                               onClick={handleClickEmployee}
-                              className={column.field}>
+                              className={`${column.field} ${classes.row}`}>
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
                                 : value}
@@ -182,7 +193,7 @@ export default function ListEmployees() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[6, 10, 25, 100]}
+            rowsPerPageOptions={[8, 25, 100]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
@@ -195,31 +206,3 @@ export default function ListEmployees() {
     </>
   );
 }
-
-// import React from 'react';
-// import { Formik, Field, Form } from 'formik';
-
-// function Cep() {
-//   function onSubmit(values) {
-//     console.log('SUBMIT', values);
-//   }
-
-//   return (
-//     <div className="cep">
-//       <Formik
-//         render={({ isValid }) => (
-//           <Form>
-//             <div className="form-control-group">
-//               <label>Cep</label>
-//               <Field name="cep" type="text" />
-//             </div>
-
-//             <button type="submit" disabled={!isValid}>Enviar</button>
-//           </Form>
-//         )}
-//       />
-//     </div>
-//   );
-// }
-
-// export default Cep;

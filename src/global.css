@@ -5,45 +5,37 @@
 }
 
 :root {
-  --white: #E5E5E5;
-  --light-grey:#F2F2F2;
+  --white: #e5e5e5;
+  --light-grey: #f2f2f2;
   --dark-green: #285035;
   --medium-green: #187330;
-  --light-green: #D4DDCE;
+  --light-green: #d4ddce;
   --grey: #404040;
-  
-  
 }
 
-
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   width: 100vw;
   height: 100vh;
   background-color: var(--light-green);
-  
-
 }
 
-.page-container{
-  display:flex;
-  width:100vw;
-
+.page-container {
+  display: flex;
+  width: 100vw;
 }
 
-aside{
-  width:25vw;
+aside {
+  width: 25vw;
 }
 
-main{
-  width:75vw;
+main {
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
 }
 
-.details{
+.details {
   cursor: pointer;
 }
-
