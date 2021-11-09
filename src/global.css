@@ -40,5 +40,10 @@ main{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
+}
+
+.details{
+  cursor: pointer;
 }
 

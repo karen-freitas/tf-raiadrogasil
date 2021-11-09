@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, TextField } from '@mui/material';
 
-export default function FormPropsTextFields({ label, type, name, value, onChange, className }) {
+export default function FormPropsTextFields({ label, type, name, value, onChange, className, size }) {
     return (
         <Box
             component="form"

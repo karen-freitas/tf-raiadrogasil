@@ -9,3 +9,11 @@
   justify-content: center;
   margin: 3.5rem;
 }
+
+.slogan-image {
+  display: flex;
+  padding: 25px;
+  padding-top: 22rem;
+  justify-content: center;
+  margin: 3.5rem;
+}
