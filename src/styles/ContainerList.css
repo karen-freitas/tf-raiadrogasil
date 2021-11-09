@@ -2,5 +2,6 @@
     height: 95vh;
     background: var(--light-grey);
     width: 60rem;
+    padding: 1rem;
 }
 

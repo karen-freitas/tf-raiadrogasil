@@ -3,8 +3,13 @@ import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import BasicModal from '../../components/modals/modals';
+
+
+import Header from '../../components/Header/Header.js';
+
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css'
+
 
 export default function Register() {
   const [values, setValues] = useState({
@@ -34,6 +39,7 @@ export default function Register() {
       .catch((error) => console.log(error));
     setShowModal(true);
   };
+
 
   return (
     <>
