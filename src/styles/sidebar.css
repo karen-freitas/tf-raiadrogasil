@@ -1,0 +1,11 @@
+.sidebar {
+  height: 100vh;
+  background: var(--dark-green);
+  width: 23rem;
+}
+
+.logo-image {
+  display: flex;
+  justify-content: center;
+  margin: 3.5rem;
+}

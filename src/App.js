@@ -1,25 +1,21 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Sidebar from './components/sidebar/sidebar.js';
 import ListEmployees from './pages/ListEmployees/index.js';
-import Register from './pages/Register';
+import Register from './pages/Register/index';
 
 export default function App() {
   return (
     <>
-      <header>
-        <h1>Header</h1>
-      </header>
       <section className="page-container">
-        <aside>
-          Sidebar
-        </aside>
+        <Sidebar />
 
-      <main>
-        <Routes>
-          <Route path="/" element={<ListEmployees />} />
-          <Route path="/cadastro" element={<Register />} />
-        </Routes>
-      </main>
+        <main>
+          <Routes>
+            <Route path="/" element={<ListEmployees />} />
+            <Route path="/cadastro" element={<Register />} />
+          </Routes>
+        </main>
       </section>
     </>
   );
