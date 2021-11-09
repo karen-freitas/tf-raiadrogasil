@@ -10,7 +10,6 @@ import Header from '../../components/Header/Header.js';
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css'
 
-
 export default function Register() {
   const [values, setValues] = useState({
     name: '',
