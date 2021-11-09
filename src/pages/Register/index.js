@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import BasicModal from '../../components/modals/modals';
 import FormPropsTextFields from '../../components/input/input';
