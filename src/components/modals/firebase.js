@@ -8,5 +8,3 @@ export const registerEmployee = (values) =>
 
 export const deleteEmployee = (id) =>
   db.collection('employees').doc(id).delete();
-
-export const listEmployee = () => db.collection('employees').get();
