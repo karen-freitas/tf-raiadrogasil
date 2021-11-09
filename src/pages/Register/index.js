@@ -42,6 +42,9 @@ export default function Register() {
 
   return (
     <>
+      <Header
+        name="Cadastro"
+      />
       <div className="form-area">
         <FormPropsTextFields
           id="name"
