@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import ListEmployees from './pages/ListEmployees';
+import ListEmployees from './pages/ListEmployees/index.js';
 import Register from './pages/Register';
 
 export default function App() {
@@ -11,8 +11,8 @@ export default function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<ListEmployees/>} />
-          <Route path="/cadastro" element={<Register/>} />
+          <Route path="/" element={<ListEmployees />} />
+          <Route path="/cadastro" element={<Register />} />
         </Routes>
       </main>
     </>
