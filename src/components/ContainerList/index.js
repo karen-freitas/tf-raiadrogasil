@@ -1,13 +1,13 @@
-import React from 'react';
-import '../../styles/sidebar.css'
+// import React from 'react';
+// import '../../styles/sidebar.css'
 
-const ContainerList = ({ children }) => {
-  return (
-    <header className="ContainerList">
+// const ContainerList = ({ children }) => {
+//   return (
+//     <header className="ContainerList">
 
-      {children}
-    </header>
-  );
-};
+//       {children}
+//     </header>
+//   );
+// };
 
-export default ContainerList;
+// export default ContainerList;

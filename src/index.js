@@ -5,10 +5,9 @@ import App from './App'
 
 import './global.css';
 
-
 ReactDOM.render(
   <BrowserRouter>
-    <App/>
+    <App />
   </BrowserRouter>,
   document.getElementById('root'),
 );
