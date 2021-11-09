@@ -1,0 +1,23 @@
+.form-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 4rem;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+  width: 20rem;
+}
+
+.css-1cko8mj {
+  width: 0;
+}
+
+.css-1wc848c-MuiFormHelperText-root,
+.css-1wc848c-MuiFormHelperText-root.Mui-error {
+  font-size: 1rem;
+  width: 20rem;
+}

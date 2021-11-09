@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import BasicModal from '../../components/modals/modals';
 import { registerEmployee } from '../../services/firebase';
+import '../../styles/register.css'
 
 export default function Register() {
   const [values, setValues] = useState({
@@ -33,43 +34,53 @@ export default function Register() {
 
   return (
     <>
-      <FormPropsTextFields
-        id="name"
-        name="name"
-        label="Nome"
-        className=""
-        onChange={handleChange}
-        type="text"
-      />
-      <FormPropsTextFields
-        id="last-name"
-        name="lastName"
-        label="Sobrenome"
-        className=""
-        onChange={handleChange}
-        type="text"
-      />
-      <FormPropsTextFields
-        id="email"
-        name="email"
-        label="E-mail"
-        className=""
-        onChange={handleChange}
-        type="email"
-      />
-      <FormPropsTextFields
-        id="phone"
-        name="phone"
-        label="Telefone"
-        className=""
-        onChange={handleChange}
-        type="text"
-      />
-
+      <div className="form-area">
+        <FormPropsTextFields
+          id="name"
+          name="name"
+          label="Nome"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.name === ""}
+          helperText={values.name === "" ? 'Por favor, preencha o seu nome' : ""}
+        />
+        <FormPropsTextFields
+          id="last-name"
+          name="lastName"
+          label="Sobrenome"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.lastName === ""}
+          helperText={values.lastName === "" ? 'Por favor, preencha o seu sobrenome' : ""}
+        />
+        <FormPropsTextFields
+          id="email"
+          name="email"
+          label="E-mail"
+          className=""
+          onChange={handleChange}
+          type="email"
+          error={values.email === ""}
+          helperText={values.email === "" ? 'Por favor, preencha o seu e-mail' : ""}
+        />
+        <FormPropsTextFields
+          id="phone"
+          name="phone"
+          label="Telefone"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.phone === ""}
+          helperText={values.phone === "" ? 'Por favor, preencha com o seu telefone' : ""}
+        />
+      </div>
       <Button onClick={() => register()}>Cadastrar</Button>
       <BasicModal showModal={showModal} setShowModal={setShowModal}>
         <p>Cadastrado com sucesso!</p>
       </BasicModal>
+
     </>
   );
 }

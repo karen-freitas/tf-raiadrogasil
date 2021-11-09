@@ -8,7 +8,6 @@ const Sidebar = ({ children }) => {
       <div className="logo-image">
         <Logo />
       </div>
-
       {children}
     </header>
   );
