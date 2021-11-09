@@ -16,7 +16,7 @@ export default function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<ListEmployees />} />
+          <Route path="/" element={<ListEmployees/>} />
           <Route path="/cadastro" element={<Register />} />
         </Routes>
       </main>
