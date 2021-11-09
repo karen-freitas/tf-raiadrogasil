@@ -1,12 +1,11 @@
 import * as React from 'react';
-// import {registerEmployee} from '../src/services/firebase'
 
-import BasicModal from './components/modals/modals';
-import FormPropsTextFields from './components/input/input';
+import BasicModal from '../../components/modals/modals';
+import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 
-export function App() {
+export default function Register() {
 
   const [values, setValues] = useState({
     name: '',
@@ -59,4 +58,3 @@ export function App() {
     </>
   );
 }
-
