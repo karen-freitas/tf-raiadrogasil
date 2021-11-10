@@ -1,7 +1,7 @@
 import React from 'react';
 import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
-import BasicModal from '../../components/modals/modals';
+import { BasicModal } from '../../components/modals/modals';
 import Header from '../../components/Header/Header.js';
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css';
@@ -12,9 +12,17 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 
-const options = ['Option 1', 'Option 2'];
+const gender = [
+{title: 'Feminino'},
+
+];  
+
 
 export default function Register() {
+  const [showModal, setShowModal] = useState(false);
+  const [popUpText, setPopUpText] = useState('')
+
+
   const [values, setValues] = useState({
     name: '',
     lastName: '',
@@ -27,9 +35,8 @@ export default function Register() {
     city: '',
     state: '',
     role: '',
-  });
-
-  const [showModal, setShowModal] = useState(false);
+    gender:'',
+    });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,6 +44,7 @@ export default function Register() {
       ...values,
       [name]: value,
     });
+  console.log(values);
   };
 
   const navigate = useNavigate();
@@ -44,6 +52,7 @@ export default function Register() {
 
   const register = () => {
     registerEmployee(values)
+      .then(( doc ) => console.log(doc.data))
       .then(() => setShowModal(true))
       .catch((error) => console.log(error));
     setShowModal(true);
@@ -95,7 +104,7 @@ export default function Register() {
           type="text"
           error={values.name === ''}
           helperText={
-            values.name === '' ? 'Por favor, preencha o seu nome' : ''
+          values.name === '' ? 'Por favor, preencha o seu nome' : ''
           }
         />
         <FormPropsTextFields
@@ -244,50 +253,38 @@ export default function Register() {
         />
 
         <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={options}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Movie" />}
-        />
-        
-
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={options}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Movie" />}
+          id="sexo"
+          name="gender"
+          options={gender}
+          value={values.gender}
+          onChange={handleChange}
+          getOptionLabel={(option) => option.title}
+          style={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Combo box" defaultValue="The Godfather" variant="outlined" />}
         />
 
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={options}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Movie" />}
-        />
-                 
+                       
       </div>
       <Stack
         direction="row"
         spacing={2}
         justifyContent="center"
         alignItems="flex-end">
-        <Button onClick={register} variant="contained" color="success">
+        <Button onClick={() => {
+          register()
+          setShowModal(true)
+          setPopUpText('Cadastro realizado com sucesso!')
+        }} variant="contained" color="success">
           Cadastrar
         </Button>
       </Stack>
 
-      <BasicModal showModal={showModal} setShowModal={setShowModal}>
-        <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
-          Cadastrado com sucesso!
-        </p>
-
-        <Button onClick={routerHome} variant="contained" color="success">
-          OK
-        </Button>
-      </BasicModal>
+      <BasicModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        popupText={popUpText}
+        onClick={routerHome}
+      />
     </>
   );
 }

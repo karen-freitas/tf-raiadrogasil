@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Modal } from '@mui/material';
+import { Box, Modal, Button } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -13,9 +13,8 @@ const style = {
   p: 4,
 };
 
-const BasicModal = ({ children, showModal, setShowModal }) => {
+export function BasicModal({ children, showModal, setShowModal, popupText, onClick }) {
   const handleClose = () => setShowModal(false);
-
   return (
     <div>
       <Modal
@@ -23,10 +22,45 @@ const BasicModal = ({ children, showModal, setShowModal }) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <Box sx={style}>{children}</Box>
+        <Box style={{ display: 'flex', flexDirection: 'column' }} sx={style}>
+          {children}
+          <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
+            {popupText}
+          </p>
+          <Button onClick={onClick} variant="contained" color="success">
+            OK
+          </Button>
+        </Box>
       </Modal>
     </div>
   );
 };
 
-export default BasicModal;
+export function DeleteModal(
+  { children, showModalDelete, setShowModalDelete, popupText, onClick }
+) {
+  const handleClose = () => setShowModalDelete(false);
+  return (
+    <div>
+      <Modal
+        open={showModalDelete}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box style={{ display: 'flex', flexDirection: 'column' }} sx={style}>
+          {children}
+          <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
+            {popupText}
+          </p>
+          <Button
+            onClick={onClick}
+            variant="contained"
+            color="success"
+          >
+            OK
+          </Button>
+        </Box>
+      </Modal>
+    </div>
+  );
+};

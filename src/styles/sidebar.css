@@ -1,21 +1,22 @@
 .sidebar {
-  height: 100vh;
   background: var(--green);
   width: 7rem;
+  min-height: 100vh;
+  height:auto;
   box-shadow: 0px 5px 5px rgb(0 0 0 / 40%);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.logo-image {
+.logo-image {    
   display: flex;
   margin: 0.2rem;
   padding-top: 0.5rem;
 }
 
 .slogan-image {
-  display: flex;
+  display: flex; 
   padding: 5px;
   margin: 0.2rem;
   padding-bottom: 3rem;
