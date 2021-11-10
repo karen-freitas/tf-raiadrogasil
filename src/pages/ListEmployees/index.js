@@ -135,16 +135,13 @@ export default function ListEmployees() {
 
   return (
     <>
-      <Header name="Colaboradores" />
-      {activeProfile ? (
-        <TesteProfile
-          data={employeeSelected}
-          onClick={handleCloseProfile}
-          deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
-        />
-      ) : (
-        <Paper sx={{ width: '95%' }} className={classes.container}>
-          <TableContainer sx={{ maxHeight: 500 }} className={classes.container}>
+      <Header
+        name="Colaboradores"
+      />
+
+      {activeProfile ? <TesteProfile data={employeeSelected} onClick={handleCloseProfile} deleteEmployee={() => handleDeleteEmployee(employeeSelected)} /> :
+        (<Paper sx={{ width: '100%' }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 {columns.map((column) => (
