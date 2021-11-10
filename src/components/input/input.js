@@ -3,7 +3,7 @@ import { Box, TextField } from '@mui/material';
 import '../../styles/register.css'
 
 export default function FormPropsTextFields(
-    { label, type, name, value, onChange, className, helperText, error }
+    { label, type, name, value, onChange, className, helperText, error, disabled}
 ) {
     return (
         <Box
@@ -25,6 +25,7 @@ export default function FormPropsTextFields(
                 onChange={onChange}
                 error={error}
                 helperText={helperText}
+                disabled={disabled}
             />
         </Box>
     );
