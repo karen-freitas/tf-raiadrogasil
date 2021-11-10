@@ -42,12 +42,12 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           value={data.phone}
         />
         <FormPropsTextFields
-          id="address"
-          name="address"
-          label="Endereço"
+          id="role"
+          name="role"
+          label="Função"
           className=""
           type="text"
-          value={data.adress}
+          value={data.role}
         />
         <FormPropsTextFields
           id="cep"
@@ -58,12 +58,44 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           value={data.cep}
         />
         <FormPropsTextFields
-          id="role"
-          name="role"
-          label="Função"
+          id="address"
+          name="address"
+          label="Endereço"
           className=""
           type="text"
-          value={data.role}
+          value={data.address}
+        />
+        <FormPropsTextFields
+          id="number"
+          name="number"
+          label="Número"
+          className=""
+          type="text"
+          value={data.number}
+        />
+        <FormPropsTextFields
+          id="district"
+          name="district"
+          label="Bairro"
+          className=""
+          type="text"
+          value={data.district}
+        />
+        <FormPropsTextFields
+          id="city"
+          name="city"
+          label="Cidade"
+          className=""
+          type="text"
+          value={data.city}
+        />
+        <FormPropsTextFields
+          id="state"
+          name="state"
+          label="Estado"
+          className=""
+          type="text"
+          value={data.state}
         />
       </div>
 
