@@ -147,15 +147,17 @@ export default function ListEmployees() {
           <TableContainer sx={{ maxHeight: 500 }} className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.field}
-                    align={column.align}
-                    style={{ top: 0, minWidth: column.minWidth }}
-                    className={classes.root}>
-                    {column.headerName}
-                  </TableCell>
-                ))}
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.field}
+                      align={column.align}
+                      style={{ top: 0, minWidth: column.minWidth }}
+                      className={classes.root}>
+                      {column.headerName}
+                    </TableCell>
+                  ))}
+                </TableRow>
               </TableHead>
               <TableBody>
                 {employees
