@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { listEmployee, deleteEmployee } from '../../services/firebase';
 import TesteProfile from '../../components/TesteProfile';
+import Header from '../../components/Header/Header.js';
 
 import { DataGrid } from '@material-ui/data-grid';
 import { styled } from '@mui/material/styles';
@@ -15,11 +16,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@material-ui/styles';
 
-
-
 export default function ListEmployees() {
   const [employees, setEmployees] = useState([]);
-  const [rows, setRows] = useState([]);
   const [activeProfile, setActiveProfile] = useState(false);
   const [employeeSelected, setEmployeeSelected] = useState({});
 
@@ -41,16 +39,15 @@ export default function ListEmployees() {
     row: {
       color: '#404040',
     },
-    container:{
-      
-      'margin-top':'0',
-      padding:'1rem',
-      'padding-top':'0',
-      border:'none',
-      'box-shadow':'none',
+    container: {
+      'margin-top': '0',
+      padding: '1rem',
+      'padding-top': '0',
+      border: 'none',
+      'box-shadow': 'none',
       'background-color': '#F2F2F2 ',
-      'border-collapse': 'collapse'
-    }
+      'border-collapse': 'collapse',
+    },
   });
 
   const classes = useStyles();
@@ -58,14 +55,10 @@ export default function ListEmployees() {
   useEffect(() => {
     listEmployee().then((list) => {
       const newEmployees = [];
-      const newRows = [];
       list.forEach((doc) => {
-        newEmployees.push({ ...doc.data(), id: doc.id });
-        newRows.push({ ...doc.data(), id: doc.id, details:`Mais`});
+        newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployees(newEmployees);
-      setRows(newRows);
-      console.log(newEmployees);
     });
   }, []);
 
@@ -108,7 +101,7 @@ export default function ListEmployees() {
   ];
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -122,7 +115,7 @@ export default function ListEmployees() {
   const handleClickEmployee = (event) => {
     if (event.target.getAttribute('value') === 'Mais') {
       const id = event.target.getAttribute('data-item');
-      const employee = rows.find((employee) => employee.id === id);
+      const employee = employees.find((employee) => employee.id === id);
       console.log(employee);
       setActiveProfile(true);
       setEmployeeSelected(employee);
@@ -135,19 +128,19 @@ export default function ListEmployees() {
 
   const handleDeleteEmployee = (employee) => {
     deleteEmployee(employee.id);
-    const newArray = [...rows];
-    setRows(newArray.filter((data) => data.id !== employee.id));
+    const newArray = [...employees];
+    setEmployees(newArray.filter((data) => data.id !== employee.id));
     setActiveProfile(false);
   };
 
   return (
     <>
+      <Header name="Colaboradores" />
       {activeProfile ? (
         <TesteProfile
           data={employeeSelected}
           onClick={handleCloseProfile}
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
-          
         />
       ) : (
         <Paper sx={{ width: '95%' }} className={classes.container}>
@@ -165,7 +158,7 @@ export default function ListEmployees() {
                 ))}
               </TableHead>
               <TableBody>
-                {rows
+                {employees
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -179,7 +172,7 @@ export default function ListEmployees() {
                           return (
                             <TableCell
                               id={column.field}
-                              data-item = {row.id}
+                              data-item={row.id}
                               key={column.field}
                               align={column.align}
                               value={value}
@@ -198,9 +191,9 @@ export default function ListEmployees() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[8, 25, 100]}
+            rowsPerPageOptions={[6, 25, 100]}
             component="div"
-            count={rows.length}
+            count={employees.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
