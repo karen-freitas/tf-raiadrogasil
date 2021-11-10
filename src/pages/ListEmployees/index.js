@@ -59,6 +59,7 @@ export default function ListEmployees() {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployees(newEmployees);
+   
     });
   }, []);
 
@@ -78,19 +79,20 @@ export default function ListEmployees() {
       format: (value) => value.toLocaleString('en-US'),
     },
     {
+      field: 'role',
+      headerName: 'Role',
+      minWidth: 150,
+      align: 'left',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    {
       field: 'email',
       headerName: 'Email',
       minWidth: 150,
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
-    {
-      field: 'phone',
-      headerName: 'Telefone',
-      minWidth: 150,
-      align: 'left',
-      format: (value) => value.toLocaleString('en-US'),
-    },
+   
     {
       field: 'details',
       headerName: 'Ações',
