@@ -125,9 +125,6 @@ export default function ListEmployees() {
     setActiveProfile(false);
   };
 
-
-
-
   return (
     <>
       <Header

@@ -8,6 +8,11 @@ import '../../styles/register.css';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
+
+const options = ['Option 1', 'Option 2'];
 
 export default function Register() {
   const [values, setValues] = useState({
@@ -223,6 +228,46 @@ export default function Register() {
             values.state === '' ? 'Por favor, preencha com o seu estado' : ''
           }
         />
+
+        <FormPropsTextFields
+          id="state"
+          name="state"
+          value={values.state}
+          label="Estado"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.state === ''}
+          helperText={
+            values.state === '' ? 'Por favor, preencha com o seu estado' : ''
+          }
+        />
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={options}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Movie" />}
+        />
+        
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={options}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Movie" />}
+        />
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={options}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Movie" />}
+        />
+                 
       </div>
       <Stack
         direction="row"
@@ -246,3 +291,7 @@ export default function Register() {
     </>
   );
 }
+
+
+
+
