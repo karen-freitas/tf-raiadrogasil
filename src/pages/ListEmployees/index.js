@@ -4,6 +4,7 @@ import { listEmployee, deleteEmployee } from '../../services/firebase';
 import TesteProfile from '../../components/TesteProfile';
 import Header from '../../components/Header/Header.js';
 
+
 import { DataGrid } from '@material-ui/data-grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -16,20 +17,11 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@material-ui/styles';
 
+
 export default function ListEmployees() {
   const [employees, setEmployees] = useState([]);
   const [activeProfile, setActiveProfile] = useState(false);
   const [employeeSelected, setEmployeeSelected] = useState({});
-
-  // const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  //   [`&.${tableCellClasses.head}`]: {
-  //     backgroundColor: theme.palette.common.black,
-  //     color: theme.palette.common.white,
-  //   },
-  //   [`&.${tableCellClasses.body}`]: {
-  //     fontSize: 14,
-  //   },
-  // }));
 
   const useStyles = makeStyles({
     root: {
@@ -133,12 +125,15 @@ export default function ListEmployees() {
     setActiveProfile(false);
   };
 
+
+
+
   return (
     <>
       <Header
         name="Colaboradores"
-      />
-
+      > </Header>
+  
       {activeProfile ? <TesteProfile data={employeeSelected} onClick={handleCloseProfile} deleteEmployee={() => handleDeleteEmployee(employeeSelected)} /> :
         (<Paper sx={{ width: '100%' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
