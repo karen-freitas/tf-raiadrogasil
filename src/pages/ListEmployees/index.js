@@ -33,8 +33,8 @@ export default function ListEmployees() {
 
   const useStyles = makeStyles({
     root: {
-      'background-color': '#285035',
-      color: 'white',
+      'background-color': '#d5d9de',
+      color: '#404040',
     },
     row: {
       color: '#404040',
@@ -45,7 +45,7 @@ export default function ListEmployees() {
       'padding-top': '0',
       border: 'none',
       'box-shadow': 'none',
-      'background-color': '#F2F2F2 ',
+      'background-color': '#f2f2f2',
       'border-collapse': 'collapse',
     },
   });
@@ -184,7 +184,7 @@ export default function ListEmployees() {
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
         />
       ) : (
-        <Paper sx={{ width: '100%' }}>
+        <Paper sx={{ width: '95%'}}>
           <div className="container-search">
             <div className="no-employee-container">
               <p className="no-employee">{searchText}</p>
@@ -263,7 +263,7 @@ export default function ListEmployees() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-      )}
+        )}
     </>
   );
 }

@@ -6,11 +6,15 @@
 
 :root {
   --white: #e5e5e5;
-  --light-grey: #f2f2f2;
+  --green:#96BF78;
   --dark-green: #285035;
   --medium-green: #187330;
   --light-green: #d4ddce;
+  --light-grey: #f2f2f2;
+  --medium-grey:#D5D6D7;
+  --regular-grey: #d5d9de;
   --grey: #404040;
+  
 }
 
 body {
@@ -52,6 +56,8 @@ main {
   align-items:center;
   justify-content: space-between;
   height: 4rem;
+  background-color: var(--light-grey);
+  border: none;
 }
 .input-btn-wrapper{
   display:flex;
