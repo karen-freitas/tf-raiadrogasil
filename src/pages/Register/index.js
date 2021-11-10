@@ -1,7 +1,7 @@
 import React from 'react';
 import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
-import BasicModal from '../../components/modals/modals';
+import { BasicModal } from '../../components/modals/modals';
 import Header from '../../components/Header/Header.js';
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css';
@@ -11,13 +11,18 @@ import Button from '@mui/material/Button';
 
 export default function Register() {
   const [showModal, setShowModal] = useState(false);
+  const [popUpText, setPopUpText] = useState('')
   const [values, setValues] = useState({
     name: '',
     lastName: '',
     email: '',
     phone: '',
-    address: '',
     cep: '',
+    address: '',
+    number: '',
+    district: '',
+    city: '',
+    state: '',
     role: '',
   });
 
@@ -37,6 +42,36 @@ export default function Register() {
       .then(() => setShowModal(true))
       .catch((error) => console.log(error));
     setShowModal(true);
+  };
+
+  const handleBlurCep = (e) => {
+    const value = Number(e.target.value);
+    if (value >= 10000000 && value < 99999999) {
+      dataCEP(value);
+    } else {
+      alert('O cep é inválido: ' + e.target.value);
+    }
+  };
+
+  const dataCEP = (cep) => {
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((json) => json.json())
+      .then((response) => {
+        console.log(response);
+
+        if (!response.erro) {
+          console.log(response.localidade);
+          setValues({
+            ...values,
+            address: response.logradouro,
+            district: response.bairro,
+            city: response.localidade,
+            state: response.uf,
+          });
+        } else {
+          alert('CEP inválido');
+        }
+      });
   };
 
   return (
@@ -74,9 +109,11 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="email"
-          error={values.email === ''}
+          error={!/\S+@\S+\.\S+/.test(values.email)}
           helperText={
-            values.email === '' ? 'Por favor, preencha o seu e-mail' : ''
+            !/\S+@\S+\.\S+/.test(values.email)
+              ? 'Por favor, preencha o seu e-mail'
+              : ''
           }
         />
         <FormPropsTextFields
@@ -92,8 +129,34 @@ export default function Register() {
           }
         />
         <FormPropsTextFields
+          id="role"
+          name="role"
+          label="Função"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.role === ''}
+          helperText={
+            values.role === '' ? 'Por favor, preencha com o sua função' : ''
+          }
+        />
+        <FormPropsTextFields
+          id="cep"
+          name="cep"
+          label="CEP"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.cep.length !== 8}
+          helperText={
+            values.cep.length !== 8 ? 'Por favor, preencha com o seu CEP' : ''
+          }
+          onBlur={handleBlurCep}
+        />
+        <FormPropsTextFields
           id="address"
           name="address"
+          value={values.address}
           label="Endereço"
           className=""
           onChange={handleChange}
@@ -106,27 +169,55 @@ export default function Register() {
           }
         />
         <FormPropsTextFields
-          id="cep"
-          name="cep"
-          label="CEP"
+          id="number"
+          name="number"
+          value={values.number}
+          label="Número"
           className=""
           onChange={handleChange}
           type="text"
-          error={values.cep === ''}
+          error={values.number === ''}
           helperText={
-            values.cep === '' ? 'Por favor, preencha com o seu CEP' : ''
+            values.number === '' ? 'Por favor, preencha com o seu número' : ''
           }
         />
         <FormPropsTextFields
-          id="role"
-          name="role"
-          label="Função"
+          id="district"
+          name="district"
+          value={values.district}
+          label="Bairro"
           className=""
           onChange={handleChange}
           type="text"
-          error={values.role === ''}
+          error={values.district === ''}
           helperText={
-            values.role === '' ? 'Por favor, preencha com o sua função' : ''
+            values.district === '' ? 'Por favor, preencha com o seu bairro' : ''
+          }
+        />
+        <FormPropsTextFields
+          id="city"
+          name="city"
+          value={values.city}
+          label="Cidade"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.city === ''}
+          helperText={
+            values.city === '' ? 'Por favor, preencha com a sua cidade' : ''
+          }
+        />
+        <FormPropsTextFields
+          id="state"
+          name="state"
+          value={values.state}
+          label="Estado"
+          className=""
+          onChange={handleChange}
+          type="text"
+          error={values.state === ''}
+          helperText={
+            values.state === '' ? 'Por favor, preencha com o seu estado' : ''
           }
         />
       </div>
@@ -135,20 +226,21 @@ export default function Register() {
         spacing={2}
         justifyContent="center"
         alignItems="flex-end">
-        <Button onClick={register} variant="contained" color="success">
+        <Button onClick={() => {
+          register()
+          setShowModal(true)
+          setPopUpText('Cadastro realizado com sucesso!')
+        }} variant="contained" color="success">
           Cadastrar
         </Button>
       </Stack>
 
-      <BasicModal showModal={showModal} setShowModal={setShowModal}>
-        <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
-          Cadastrado com sucesso!
-        </p>
-
-        <Button onClick={routerHome} variant="contained" color="success">
-          OK
-        </Button>
-      </BasicModal>
+      <BasicModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        popupText={popUpText}
+        onClick={routerHome}
+      />
     </>
   );
 }

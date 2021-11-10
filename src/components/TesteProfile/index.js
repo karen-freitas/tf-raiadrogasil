@@ -1,20 +1,59 @@
 import React, { useState } from 'react';
 import FormPropsTextFields from '../input/input';
+import { BasicModal, DeleteModal } from '../modals/modals';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { updateEmployeeProfile } from '../../services/firebase';
 
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
-  const [disableInput, setDisableInput] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [popUpText, setPopUpText] = useState('')
+  const [disableInput, setDisableInput] = useState(true);
   const [values, setValues] = useState({
     name: data.name,
     lastName: data.lastName,
     email: data.email,
     phone: data.phone,
-    address: data.address,
-    cep: data.cep,
     role: data.role,
+    cep: data.cep,
+    address: data.address,
+    number: data.number,
+    district: data.district,
+    city: data.city,
+    state: data.state,
   });
+
+
+  const handleBlurCep = (e) => {
+    const value = Number(e.target.value);
+    if (value >= 10000000 && value < 99999999) {
+      dataCEP(value);
+    } else {
+      alert('O cep é inválido: ' + e.target.value);
+    }
+  };
+
+  const dataCEP = (cep) => {
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((json) => json.json())
+      .then((response) => {
+        console.log(response);
+
+        if (!response.erro) {
+          console.log(response.localidade);
+          setValues({
+            ...values,
+            address: response.logradouro,
+            district: response.bairro,
+            city: response.localidade,
+            state: response.uf,
+          });
+        } else {
+          alert('CEP inválido');
+        }
+      });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,26 +107,6 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           disabled={disableInput}
         />
         <FormPropsTextFields
-          id="address"
-          name="address"
-          label="Endereço"
-          className=""
-          type="text"
-          value={values.address}
-          onChange={handleChange}
-          disabled={disableInput}
-        />
-        <FormPropsTextFields
-          id="cep"
-          name="cep"
-          label="CEP"
-          className=""
-          type="text"
-          value={values.cep}
-          onChange={handleChange}
-          disabled={disableInput}
-        />
-        <FormPropsTextFields
           id="role"
           name="role"
           label="Função"
@@ -97,13 +116,79 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           onChange={handleChange}
           disabled={disableInput}
         />
+        <FormPropsTextFields
+          id="cep"
+          name="cep"
+          label="CEP (somente números)"
+          className=""
+          onChange={handleChange}
+          type="text"
+          value={values.cep}
+          onBlur={handleBlurCep}
+          disabled={disableInput}
+        />
+        <FormPropsTextFields
+          id="address"
+          name="address"
+          value={values.address}
+          label="Endereço"
+          className=""
+          onChange={handleChange}
+          type="text"
+          disabled={disableInput}
+        />
+        <FormPropsTextFields
+          id="number"
+          name="number"
+          value={values.number}
+          label="Número"
+          className=""
+          onChange={handleChange}
+          type="text"
+          disabled={disableInput}
+        />
+        <FormPropsTextFields
+          id="district"
+          name="district"
+          value={values.district}
+          label="Bairro"
+          className=""
+          onChange={handleChange}
+          type="text"
+          disabled={disableInput}
+        />
+        <FormPropsTextFields
+          id="city"
+          name="city"
+          value={values.city}
+          label="Cidade"
+          className=""
+          onChange={handleChange}
+          type="text"
+          disabled={disableInput}
+        />
+        <FormPropsTextFields
+          id="state"
+          name="state"
+          value={values.state}
+          label="Estado"
+          className=""
+          onChange={handleChange}
+          type="text"
+          disabled={disableInput}
+        />
       </div>
-
       <Stack
         direction="row"
         spacing={2}
         justifyContent="center"
         alignItems="center">
+        <BasicModal
+          popupText={popUpText}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          onClick={onClick}
+        />
         <Button
           onClick={() => {
             setDisableInput(!disableInput)
@@ -114,18 +199,41 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
                 values.lastName,
                 values.email,
                 values.phone,
-                values.address,
+                values.role,
                 values.cep,
-                values.role)
+                values.address,
+                values.number,
+                values.district,
+                values.city,
+                values.state
+              )
+              setShowModal(true)
+              setPopUpText('Perfil do funcionário atualizado com sucesso!')
             }
           }}
-          variant="outlined"
+          variant="contained"
           color="success"
         >
           {disableInput ? 'Editar' : 'Salvar'}
         </Button>
-        <Button onClick={deleteEmployee} variant="contained" color="success">
+        <DeleteModal
+          popupText={popUpText}
+          showModalDelete={showModalDelete}
+          setShowModalDelete={setShowModalDelete}
+          onClick={deleteEmployee}
+        />
+        <Button
+          onClick={() => {
+            setShowModalDelete(true)
+            setPopUpText('Gostaria de confirmar a exclusão do funcionário?')
+          }}
+          variant="contained"
+          color="success"
+        >
           Deletar
+        </Button>
+        <Button onClick={onClick} variant="outlined" color="success">
+          Voltar
         </Button>
       </Stack>
     </>
