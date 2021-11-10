@@ -36,6 +36,15 @@ main {
   align-items: center;
 }
 
-.details {
+#details {
   cursor: pointer;
+  background-image: url(./images/Vector.svg);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 2rem;
+  color:transparent;
+  font-size:0;
+  color:var(--light-grey);
 }
+
+

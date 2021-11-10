@@ -15,6 +15,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@material-ui/styles';
 
+
+
 export default function ListEmployees() {
   const [employees, setEmployees] = useState([]);
   const [rows, setRows] = useState([]);
@@ -43,9 +45,11 @@ export default function ListEmployees() {
       
       'margin-top':'0',
       padding:'1rem',
+      'padding-top':'0',
       border:'none',
       'box-shadow':'none',
       'background-color': '#F2F2F2 ',
+      'border-collapse': 'collapse'
     }
   });
 
@@ -57,7 +61,7 @@ export default function ListEmployees() {
       const newRows = [];
       list.forEach((doc) => {
         newEmployees.push({ ...doc.data(), id: doc.id });
-        newRows.push({ ...doc.data(), id: doc.id, details: 'Mais' });
+        newRows.push({ ...doc.data(), id: doc.id, details:`Mais`});
       });
       setEmployees(newEmployees);
       setRows(newRows);
@@ -117,7 +121,7 @@ export default function ListEmployees() {
 
   const handleClickEmployee = (event) => {
     if (event.target.getAttribute('value') === 'Mais') {
-      const id = event.target.getAttribute('id');
+      const id = event.target.getAttribute('data-item');
       const employee = rows.find((employee) => employee.id === id);
       console.log(employee);
       setActiveProfile(true);
@@ -147,14 +151,14 @@ export default function ListEmployees() {
         />
       ) : (
         <Paper sx={{ width: '95%' }} className={classes.container}>
-          <TableContainer sx={{ maxHeight: 500 }}>
+          <TableContainer sx={{ maxHeight: 500 }} className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 {columns.map((column) => (
                   <TableCell
                     key={column.field}
                     align={column.align}
-                    style={{ top: 57, minWidth: column.minWidth }}
+                    style={{ top: 0, minWidth: column.minWidth }}
                     className={classes.root}>
                     {column.headerName}
                   </TableCell>
@@ -174,7 +178,8 @@ export default function ListEmployees() {
                           const value = row[column.field];
                           return (
                             <TableCell
-                              id={row.id}
+                              id={column.field}
+                              data-item = {row.id}
                               key={column.field}
                               align={column.align}
                               value={value}
