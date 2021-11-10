@@ -33,7 +33,7 @@ export default function ListEmployees() {
 
   const useStyles = makeStyles({
     root: {
-      'background-color': '#d4ddce',
+      'background-color': '#d5d9de',
       color: '#404040',
     },
     row: {

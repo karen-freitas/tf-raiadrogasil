@@ -21,3 +21,14 @@
   margin: 0.2rem;
   padding-bottom: 3rem;
 }
+
+.button-group{
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.group-icon{
+  width: 58%;
+}
