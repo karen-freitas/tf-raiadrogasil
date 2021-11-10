@@ -36,7 +36,11 @@ export default function ListEmployees() {
       'background-color': '#d5d9de',
       color: '#404040',
     },
+    header:{
+      'border-radius':'0.5rem',
+    },
     row: {
+      'background-color': '#f2f2f2',
       color: '#404040',
     },
     container: {
@@ -101,7 +105,7 @@ export default function ListEmployees() {
   ];
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -182,7 +186,7 @@ export default function ListEmployees() {
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
         />
       ) : (
-        <Paper sx={{ width: '95%'}}>
+        <Paper sx={{ width: '95%', boxShadow: 0}}>
           <div className="container-search">
             <div className="no-employee-container">
               <p className="no-employee">{searchText}</p>
@@ -203,9 +207,10 @@ export default function ListEmployees() {
             </div>
           </div>
 
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer sx={{ maxHeight: 500 }}>
             <Table stickyHeader aria-label="sticky table">
-              <TableHead>
+              <TableHead
+                  className={classes.header}>
                 <TableRow>
                   {columns.map((column) => (
                     <TableCell
@@ -252,13 +257,14 @@ export default function ListEmployees() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[6, 25, 100]}
+            rowsPerPageOptions={[8, 25, 100]}
             component="div"
             count={employees.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            className={classes.row}
           />
         </Paper>
         )}
