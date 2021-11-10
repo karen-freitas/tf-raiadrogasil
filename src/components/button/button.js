@@ -1,16 +1,10 @@
-import React from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
 
-
-const Button = ({ children, onClick, type }) => {
-    return (
-        <button
-            onClick={onClick}
-            type={type}
-        >
-            {children}
-        </button>
-    );
-};
-
-export default Button;
-
+export default function ContainedButtons({ children, click }) {
+  return (
+    <Button onClick={click} variant="contained" color="success">
+      {children}
+    </Button>
+  );
+}
