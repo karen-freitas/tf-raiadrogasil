@@ -10,6 +10,7 @@ export default function FormPropsTextFields({
   onChange,
   onBlur,
   className,
+  disabled,
   helperText,
   error,
 }) {
@@ -33,6 +34,7 @@ export default function FormPropsTextFields({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
+          disabled={disabled}
           error={error}
           helperText={helperText}
         />
