@@ -8,7 +8,7 @@ import { updateEmployeeProfile } from '../../services/firebase';
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
-  const [popUpText, setPopUpText] = useState('')
+  const [popUpText, setPopUpText] = useState('');
   const [disableInput, setDisableInput] = useState(true);
   const [values, setValues] = useState({
     name: data.name,
@@ -23,7 +23,6 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     city: data.city,
     state: data.state,
   });
-
 
   const handleBlurCep = (e) => {
     const value = Number(e.target.value);
@@ -191,7 +190,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         />
         <Button
           onClick={() => {
-            setDisableInput(!disableInput)
+            setDisableInput(!disableInput);
             if (!disableInput) {
               updateEmployeeProfile(
                 data.id,
@@ -205,15 +204,14 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
                 values.number,
                 values.district,
                 values.city,
-                values.state
-              )
-              setShowModal(true)
-              setPopUpText('Perfil do funcionário atualizado com sucesso!')
+                values.state,
+              );
+              setShowModal(true);
+              setPopUpText('Perfil do funcionário atualizado com sucesso!');
             }
           }}
           variant="contained"
-          color="success"
-        >
+          color="success">
           {disableInput ? 'Editar' : 'Salvar'}
         </Button>
         <DeleteModal
@@ -224,18 +222,27 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         />
         <Button
           onClick={() => {
-            setShowModalDelete(true)
-            setPopUpText('Gostaria de confirmar a exclusão do funcionário?')
+            setShowModalDelete(true);
+            setPopUpText('Gostaria de confirmar a exclusão do funcionário?');
           }}
           variant="contained"
-          color="success"
-        >
+          color="success">
           Deletar
         </Button>
         <Button onClick={onClick} variant="outlined" color="success">
           Voltar
         </Button>
       </Stack>
+      {/*    
+      <BasicModal showModal={showModal} setShowModal={setShowModal}>
+        <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
+          Cadastrado com sucesso!
+        </p>
+
+        <Button onClick={routerHome} variant="contained" color="success">
+          OK
+        </Button>
+      </BasicModal> */}
     </>
   );
 };
