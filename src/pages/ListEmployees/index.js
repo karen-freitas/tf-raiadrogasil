@@ -30,8 +30,8 @@ export default function ListEmployees() {
 
   const useStyles = makeStyles({
     root: {
-      'background-color': '#285035',
-      color: 'white',
+      'background-color': '#d5d9de',
+      color: '#404040',
     },
     row: {
       color: '#404040',
@@ -42,7 +42,7 @@ export default function ListEmployees() {
       'padding-top': '0',
       border: 'none',
       'box-shadow': 'none',
-      'background-color': '#F2F2F2 ',
+      'background-color': '#f2f2f2',
       'border-collapse': 'collapse',
     },
   });
@@ -130,14 +130,75 @@ export default function ListEmployees() {
     setActiveProfile(false);
   };
 
+  const [classInput, setClassInput] = useState('active-input');
+  const [classButton, setClassButton] = useState('search');
+
+  const [search, setSearch] = useState('');
+  const [searchText, setSearchText] = useState('');
+
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const clickSearch = () => {
+    setSearchText('');
+    if (classButton === 'search') {
+      if (search !== '') {
+        setClassButton('goBack');
+        const filteredEmployees = employees.filter((employee) => {
+          return employee.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setEmployees(filteredEmployees);
+        setClassInput('inative-input');
+        if (filteredEmployees.length === 0) {
+          setSearchText('Nenhum usuário foi encontrado');
+        }
+      }
+    } else {
+      setClassButton('search');
+      setClassInput('active-input');
+      listEmployee().then((list) => {
+        const newEmployees = [];
+        list.forEach((doc) => {
+          newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
+        });
+        setEmployees(newEmployees);
+      });
+    }
+  };
+
   return (
     <>
-      <Header
-        name="Colaboradores"
-      />
+      <Header name="Colaboradores" />
 
-      {activeProfile ? <TesteProfile data={employeeSelected} onClick={handleCloseProfile} deleteEmployee={() => handleDeleteEmployee(employeeSelected)} /> :
-        (<Paper sx={{ width: '100%' }}>
+      {activeProfile ? (
+        <TesteProfile
+          data={employeeSelected}
+          onClick={handleCloseProfile}
+          deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
+        />
+      ) : (
+        <Paper sx={{ width: '95%' }}>
+          <div className="container-search">
+            <div className="no-employee-container">
+              <p className="no-employee">{searchText}</p>
+            </div>
+            <div className="input-btn-wrapper">
+              <input
+                className={classInput}
+                type="text"
+                placeholder="Pesquisar"
+                value={search}
+                name="search"
+                onChange={onChange}></input>
+              <span className="input-group-btn">
+                <button
+                  className={`btn-search ${classButton}`}
+                  onClick={clickSearch}></button>
+              </span>
+            </div>
+          </div>
+
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -196,7 +257,7 @@ export default function ListEmployees() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        )}
+      )}
     </>
   );
 }
