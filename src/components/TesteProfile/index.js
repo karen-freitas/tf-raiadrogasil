@@ -1,83 +1,85 @@
 import React from 'react';
 import FormPropsTextFields from '../input/input';
-import '../../styles/testeProfile.css'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
+const TesteProfile = ({ data, onClick, deleteEmployee }) => {
+  return (
+    <>
+      <div className="form-area">
+        <FormPropsTextFields
+          id="name"
+          name="name"
+          label="Nome"
+          className=""
+          type="text"
+          value={data.name}
+        />
 
+        <FormPropsTextFields
+          id="lastName"
+          name="lastName"
+          label="Sobrenome"
+          className=""
+          type="text"
+          value={data.lastName}
+        />
+        <FormPropsTextFields
+          id="email"
+          name="email"
+          label="E-mail"
+          className=""
+          type="email"
+          value={data.email}
+        />
+        <FormPropsTextFields
+          id="phone"
+          name="phone"
+          label="Telefone"
+          className=""
+          type="text"
+          value={data.phone}
+        />
+        <FormPropsTextFields
+          id="address"
+          name="address"
+          label="Endereço"
+          className=""
+          type="text"
+          value={data.adress}
+        />
+        <FormPropsTextFields
+          id="cep"
+          name="cep"
+          label="CEP"
+          className=""
+          type="text"
+          value={data.cep}
+        />
+        <FormPropsTextFields
+          id="role"
+          name="role"
+          label="Função"
+          className=""
+          type="text"
+          value={data.role}
+        />
+      </div>
 
-const TesteProfile = ({ data, onClick, deleteEmployee}) => {
-    return (
-      <>
-
-        <div className="form-area">
-          <FormPropsTextFields
-            disabled={true}
-            id="name"
-            value={data.name}
-            // label="Nome"
-            className="name-profile"
-            type="text"
-
-          />
-          <FormPropsTextFields
-            disabled={true}
-            id="last-name"
-            name={data.lastName}
-            label="Sobrenome"
-            className=""
-            type="text"
-          />
-          <FormPropsTextFields
-            disabled={true}
-            id="email"
-            name={data.email}
-            label="E-mail"
-            className=""
-            type="email"
-          />
-          <FormPropsTextFields
-            disabled={true}
-            id="phone"
-            name={data.phone}
-            label="Telefone"
-            className=""
-            type="text"
-          />
-          <FormPropsTextFields
-            disabled={true}
-            id="address"
-            name={data.address}
-            label="Endereço"
-            className=""
-            type="text"
-          />
-          <FormPropsTextFields
-            disabled={true}
-            id="cep"
-            name={data.cep}
-            label="CEP"
-            className=""
-            type="text"
-          />
-          <FormPropsTextFields
-            disabled={true}
-            id="role"
-            name={data.funcao}
-            label="Função"
-            className=""
-            type="text"
-          />
-        </div>
-
-      <button onClick={onClick}>fechar</button>
-      <button onClick={deleteEmployee}>Deletar</button>
-      </>
-    );
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        alignItems="center">
+        <Button onClick={onClick} variant="outlined" color="success">
+          Voltar
+        </Button>
+        <Button onClick={deleteEmployee} variant="contained" color="success">
+          Deletar
+        </Button>
+      </Stack>
+    </>
+  );
 };
 
 export default TesteProfile;
-
-
-
-
-
-
