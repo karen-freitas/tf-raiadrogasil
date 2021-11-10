@@ -20,13 +20,11 @@ const gender = [
 
 export default function Register() {
   const [showModal, setShowModal] = useState(false);
-  const [popUpText, setPopUpText] = useState('')
-
-
+  const [popUpText, setPopUpText] = useState('');
+  const [valuesError, setValuesError] = useState({});
   const [values, setValues] = useState({
     name: '',
     lastName: '',
-    email: '',
     phone: '',
     cep: '',
     address: '',
@@ -44,7 +42,18 @@ export default function Register() {
       ...values,
       [name]: value,
     });
-  console.log(values);
+    inputValidation(name, value);
+  };
+
+  const inputValidation = (inputName, inputValue) => {
+    let isInvalid = inputValue === '';
+    if (inputName === 'email') {
+      isInvalid = !/\S+@\S+\.\S+/.test(inputValue);
+    }
+    setValuesError({
+      ...valuesError,
+      [inputName]: isInvalid,
+    });
   };
 
   const navigate = useNavigate();
@@ -59,8 +68,8 @@ export default function Register() {
   };
 
   const handleBlurCep = (e) => {
-    const value = Number(e.target.value);
-    if (value >= 10000000 && value < 99999999) {
+    const value = e.target.value;
+    if (value.length === 8) {
       dataCEP(value);
     } else {
       alert('O cep é inválido: ' + e.target.value);
@@ -71,10 +80,7 @@ export default function Register() {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((json) => json.json())
       .then((response) => {
-        console.log(response);
-
         if (!response.erro) {
-          console.log(response.localidade);
           setValues({
             ...values,
             address: response.logradouro,
@@ -88,9 +94,6 @@ export default function Register() {
       });
   };
 
-
-  
-
   return (
     <>
       <Header name="Cadastro" />
@@ -102,10 +105,8 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.name === ''}
-          helperText={
-          values.name === '' ? 'Por favor, preencha o seu nome' : ''
-          }
+          error={valuesError.name}
+          helperText={valuesError.name && 'Por favor, preencha o seu nome'}
         />
         <FormPropsTextFields
           id="last-name"
@@ -114,9 +115,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.lastName === ''}
+          error={valuesError.lastName}
           helperText={
-            values.lastName === '' ? 'Por favor, preencha o seu sobrenome' : ''
+            valuesError.lastName && 'Por favor, preencha o seu sobrenome'
           }
         />
         <FormPropsTextFields
@@ -126,12 +127,8 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="email"
-          error={!/\S+@\S+\.\S+/.test(values.email)}
-          helperText={
-            !/\S+@\S+\.\S+/.test(values.email)
-              ? 'Por favor, preencha o seu e-mail'
-              : ''
-          }
+          error={valuesError.email}
+          helperText={valuesError.email && 'Por favor, preencha o seu e-mail'}
         />
         <FormPropsTextFields
           id="phone"
@@ -139,10 +136,10 @@ export default function Register() {
           label="Telefone"
           className=""
           onChange={handleChange}
-          type="text"
-          error={values.phone === ''}
+          type="number"
+          error={valuesError.phone}
           helperText={
-            values.phone === '' ? 'Por favor, preencha com o seu telefone' : ''
+            valuesError.phone && 'Por favor, preencha com o seu telefone'
           }
         />
         <FormPropsTextFields
@@ -152,9 +149,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.role === ''}
+          error={valuesError.role}
           helperText={
-            values.role === '' ? 'Por favor, preencha com o sua função' : ''
+            valuesError.role && 'Por favor, preencha com a sua função'
           }
         />
         <FormPropsTextFields
@@ -163,11 +160,9 @@ export default function Register() {
           label="CEP"
           className=""
           onChange={handleChange}
-          type="text"
-          error={values.cep.length !== 8}
-          helperText={
-            values.cep.length !== 8 ? 'Por favor, preencha com o seu CEP' : ''
-          }
+          type="number"
+          error={valuesError.cep}
+          helperText={valuesError.cep && 'Por favor, preencha com o seu CEP'}
           onBlur={handleBlurCep}
         />
         <FormPropsTextFields
@@ -178,11 +173,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.address === ''}
+          error={valuesError.adress}
           helperText={
-            values.address === ''
-              ? 'Por favor, preencha com o seu endereço'
-              : ''
+            valuesError.adress && 'Por favor, preencha com o seu endereço'
           }
         />
         <FormPropsTextFields
@@ -193,9 +186,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.number === ''}
+          error={valuesError.number}
           helperText={
-            values.number === '' ? 'Por favor, preencha com o seu número' : ''
+            valuesError.number && 'Por favor, preencha com o seu número'
           }
         />
         <FormPropsTextFields
@@ -206,9 +199,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.district === ''}
+          error={valuesError.district}
           helperText={
-            values.district === '' ? 'Por favor, preencha com o seu bairro' : ''
+            valuesError.district && 'Por favor, preencha com o seu bairro'
           }
         />
         <FormPropsTextFields
@@ -219,9 +212,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.city === ''}
+          error={valuesError.city}
           helperText={
-            values.city === '' ? 'Por favor, preencha com a sua cidade' : ''
+            valuesError.city && 'Por favor, preencha com a sua cidade'
           }
         />
         <FormPropsTextFields
@@ -232,23 +225,9 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.state === ''}
+          error={valuesError.state}
           helperText={
-            values.state === '' ? 'Por favor, preencha com o seu estado' : ''
-          }
-        />
-
-        <FormPropsTextFields
-          id="state"
-          name="state"
-          value={values.state}
-          label="Estado"
-          className=""
-          onChange={handleChange}
-          type="text"
-          error={values.state === ''}
-          helperText={
-            values.state === '' ? 'Por favor, preencha com o seu estado' : ''
+            valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
 
@@ -270,11 +249,14 @@ export default function Register() {
         spacing={2}
         justifyContent="center"
         alignItems="flex-end">
-        <Button onClick={() => {
-          register()
-          setShowModal(true)
-          setPopUpText('Cadastro realizado com sucesso!')
-        }} variant="contained" color="success">
+        <Button
+          onClick={() => {
+            register();
+            setShowModal(true);
+            setPopUpText('Cadastro realizado com sucesso!');
+          }}
+          variant="contained"
+          color="success">
           Cadastrar
         </Button>
       </Stack>

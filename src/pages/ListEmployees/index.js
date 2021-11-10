@@ -3,13 +3,10 @@ import { useState, useEffect } from 'react';
 import { listEmployee, deleteEmployee } from '../../services/firebase';
 import TesteProfile from '../../components/TesteProfile';
 import Header from '../../components/Header/Header.js';
-
-import { DataGrid } from '@material-ui/data-grid';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
@@ -141,7 +138,6 @@ export default function ListEmployees() {
 
   const onChange = (e) => {
     setSearch(e.target.value);
-    console.log(search);
   };
 
   const clickSearch = () => {
@@ -182,24 +178,24 @@ export default function ListEmployees() {
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
         />
       ) : (
-        <Paper sx={{ width: '95%'}}>
+        <Paper sx={{ width: '95%' }}>
           <div className="container-search">
             <div className="no-employee-container">
               <p className="no-employee">{searchText}</p>
             </div>
             <div className="input-btn-wrapper">
-            <input
-              className={classInput}
-              type="text"
-              placeholder="Pesquisar"
-              value={search}
-              name="search"
-              onChange={onChange}></input>
-            <span className="input-group-btn">
-              <button
-                className={`btn-search ${classButton}`}
-                onClick={clickSearch}></button>
-            </span>
+              <input
+                className={classInput}
+                type="text"
+                placeholder="Pesquisar"
+                value={search}
+                name="search"
+                onChange={onChange}></input>
+              <span className="input-group-btn">
+                <button
+                  className={`btn-search ${classButton}`}
+                  onClick={clickSearch}></button>
+              </span>
             </div>
           </div>
 
@@ -261,7 +257,7 @@ export default function ListEmployees() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        )}
+      )}
     </>
   );
 }

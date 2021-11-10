@@ -3,9 +3,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: auto;
-  /* justify-content: flex-start; */
-  /* align-items: baseline; */
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-left: 5rem;
 }
 

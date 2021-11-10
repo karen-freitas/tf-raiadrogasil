@@ -8,12 +8,17 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
-export function BasicModal({ children, showModal, setShowModal, popupText, onClick }) {
+export function BasicModal({
+  children,
+  showModal,
+  setShowModal,
+  popupText,
+  onClick,
+}) {
   const handleClose = () => setShowModal(false);
   return (
     <div>
@@ -34,11 +39,15 @@ export function BasicModal({ children, showModal, setShowModal, popupText, onCli
       </Modal>
     </div>
   );
-};
+}
 
-export function DeleteModal(
-  { children, showModalDelete, setShowModalDelete, popupText, onClick }
-) {
+export function DeleteModal({
+  children,
+  showModalDelete,
+  setShowModalDelete,
+  popupText,
+  onClick,
+}) {
   const handleClose = () => setShowModalDelete(false);
   return (
     <div>
@@ -52,15 +61,11 @@ export function DeleteModal(
           <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
             {popupText}
           </p>
-          <Button
-            onClick={onClick}
-            variant="contained"
-            color="success"
-          >
+          <Button onClick={onClick} variant="contained" color="success">
             OK
           </Button>
         </Box>
       </Modal>
     </div>
   );
-};
+}

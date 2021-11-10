@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import FormPropsTextFields from '../input/input';
 import { BasicModal, DeleteModal } from '../modals/modals';
+import { ReactComponent as EditButton } from '../../images/button_edit.svg';
+import { ReactComponent as DeleteButton } from '../../images/button_delete.svg';
+import { ReactComponent as SaveButton } from '../../images/button_save.svg';
+import { ReactComponent as ReturnButton } from '../../images/return.svg';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { updateEmployeeProfile } from '../../services/firebase';
+import '../../styles/testeProfile.css'
 
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
-  const [popUpText, setPopUpText] = useState('')
+  const [popUpText, setPopUpText] = useState('');
   const [disableInput, setDisableInput] = useState(true);
   const [values, setValues] = useState({
     name: data.name,
@@ -24,10 +29,9 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     state: data.state,
   });
 
-
   const handleBlurCep = (e) => {
-    const value = Number(e.target.value);
-    if (value >= 10000000 && value < 99999999) {
+    const value = e.target.value;
+    if (value.length === 8) {
       dataCEP(value);
     } else {
       alert('O cep é inválido: ' + e.target.value);
@@ -38,10 +42,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((json) => json.json())
       .then((response) => {
-        console.log(response);
-
         if (!response.erro) {
-          console.log(response.localidade);
           setValues({
             ...values,
             address: response.logradouro,
@@ -65,6 +66,12 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
 
   return (
     <>
+      <div className="container-return">
+        <Button onClick={onClick}>
+          <ReturnButton />
+        </Button>
+      </div>
+
       <div className="form-area">
         <FormPropsTextFields
           id="name"
@@ -181,8 +188,12 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
       <Stack
         direction="row"
         spacing={2}
-        justifyContent="center"
-        alignItems="center">
+        display="flex"
+        marginTop="10rem"
+        width="100%"
+        justifyContent="end"
+        alignItems="center"
+      >
         <BasicModal
           popupText={popUpText}
           showModal={showModal}
@@ -191,7 +202,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         />
         <Button
           onClick={() => {
-            setDisableInput(!disableInput)
+            setDisableInput(!disableInput);
             if (!disableInput) {
               updateEmployeeProfile(
                 data.id,
@@ -205,16 +216,14 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
                 values.number,
                 values.district,
                 values.city,
-                values.state
-              )
-              setShowModal(true)
-              setPopUpText('Perfil do funcionário atualizado com sucesso!')
+                values.state,
+              );
+              setShowModal(true);
+              setPopUpText('Perfil do funcionário atualizado com sucesso!');
             }
           }}
-          variant="contained"
-          color="success"
         >
-          {disableInput ? 'Editar' : 'Salvar'}
+          {disableInput ? <EditButton /> : <SaveButton />}
         </Button>
         <DeleteModal
           popupText={popUpText}
@@ -224,16 +233,11 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         />
         <Button
           onClick={() => {
-            setShowModalDelete(true)
-            setPopUpText('Gostaria de confirmar a exclusão do funcionário?')
+            setShowModalDelete(true);
+            setPopUpText('Gostaria de confirmar a exclusão do funcionário?');
           }}
-          variant="contained"
-          color="success"
         >
-          Deletar
-        </Button>
-        <Button onClick={onClick} variant="outlined" color="success">
-          Voltar
+          <DeleteButton />
         </Button>
       </Stack>
     </>
