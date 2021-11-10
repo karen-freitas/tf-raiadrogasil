@@ -1,7 +1,7 @@
 import React from 'react';
 import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
-import BasicModal from '../../components/modals/modals';
+import { BasicModal } from '../../components/modals/modals';
 import Header from '../../components/Header/Header.js';
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css';
@@ -10,6 +10,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 export default function Register() {
+  const [showModal, setShowModal] = useState(false);
+  const [popUpText, setPopUpText] = useState('')
   const [values, setValues] = useState({
     name: '',
     lastName: '',
@@ -23,8 +25,6 @@ export default function Register() {
     state: '',
     role: '',
   });
-
-  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,6 +73,9 @@ export default function Register() {
         }
       });
   };
+
+
+  
 
   return (
     <>
@@ -226,20 +229,21 @@ export default function Register() {
         spacing={2}
         justifyContent="center"
         alignItems="flex-end">
-        <Button onClick={register} variant="contained" color="success">
+        <Button onClick={() => {
+          register()
+          setShowModal(true)
+          setPopUpText('Cadastro realizado com sucesso!')
+        }} variant="contained" color="success">
           Cadastrar
         </Button>
       </Stack>
 
-      <BasicModal showModal={showModal} setShowModal={setShowModal}>
-        <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
-          Cadastrado com sucesso!
-        </p>
-
-        <Button onClick={routerHome} variant="contained" color="success">
-          OK
-        </Button>
-      </BasicModal>
+      <BasicModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        popupText={popUpText}
+        onClick={routerHome}
+      />
     </>
   );
 }

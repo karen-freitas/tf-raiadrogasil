@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/header.css';
 
 
+
 const Header = ({ children, className, name }) => {
     return (
         <header className="header">
@@ -10,6 +11,7 @@ const Header = ({ children, className, name }) => {
              className={className ? className : "header"}
              />
             <h1 className="name-header">{name}</h1>
+
             <hr />
         </header>
     );

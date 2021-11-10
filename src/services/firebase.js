@@ -9,4 +9,32 @@ export const registerEmployee = (values) =>
 export const deleteEmployee = (id) =>
   db.collection('employees').doc(id).delete();
 
+export const updateEmployeeProfile = (
+  id,
+  newName,
+  newLastName,
+  newEmail,
+  newPhone,
+  newAddress,
+  newCep,
+  newRole,
+  newNumber,
+  newDistrict,
+  newCity,
+  newState
+) =>
+  db.collection('employees').doc(id).update({
+    name: newName,
+    lastName: newLastName,
+    email: newEmail,
+    phone: newPhone,
+    role: newRole,
+    cep: newCep,
+    address: newAddress,
+    number: newNumber,
+    district: newDistrict,
+    city: newCity,
+    state: newState,
+  });
+
 export const listEmployee = () => db.collection('employees').orderBy('name', 'asc').get();
