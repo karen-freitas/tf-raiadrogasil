@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   return (
     <>
-      <Header name="Perfil do Colaborador" />
       <div className="form-area">
         <FormPropsTextFields
           id="name"
