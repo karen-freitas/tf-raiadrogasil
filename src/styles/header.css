@@ -2,5 +2,8 @@
     width: 100%;
 }
 .name-header{
-     color: var(--dark-green);
+    color: var(--dark-green);
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+    font-size: 3em;
 }
