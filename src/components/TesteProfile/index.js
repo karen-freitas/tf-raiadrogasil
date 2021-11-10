@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import FormPropsTextFields from '../input/input';
 import { BasicModal, DeleteModal } from '../modals/modals';
+import { ReactComponent as EditButton } from '../../images/button_edit.svg';
+import { ReactComponent as DeleteButton } from '../../images/button_delete.svg';
+import { ReactComponent as SaveButton } from '../../images/button_save.svg';
+import { ReactComponent as BackButton } from '../../images/button_back.svg';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { updateEmployeeProfile } from '../../services/firebase';
@@ -181,8 +185,9 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
       <Stack
         direction="row"
         spacing={2}
-        justifyContent="center"
-        alignItems="center">
+        justifyContent="end"
+        alignItems="center"
+      >
         <BasicModal
           popupText={popUpText}
           showModal={showModal}
@@ -211,10 +216,8 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
               setPopUpText('Perfil do funcionário atualizado com sucesso!')
             }
           }}
-          variant="contained"
-          color="success"
         >
-          {disableInput ? 'Editar' : 'Salvar'}
+          {disableInput ? <EditButton /> : <SaveButton />}
         </Button>
         <DeleteModal
           popupText={popUpText}
@@ -227,13 +230,11 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
             setShowModalDelete(true)
             setPopUpText('Gostaria de confirmar a exclusão do funcionário?')
           }}
-          variant="contained"
-          color="success"
         >
-          Deletar
+          <DeleteButton />
         </Button>
-        <Button onClick={onClick} variant="outlined" color="success">
-          Voltar
+        <Button onClick={onClick}>
+          <BackButton />
         </Button>
       </Stack>
     </>
