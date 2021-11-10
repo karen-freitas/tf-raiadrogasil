@@ -47,4 +47,68 @@ main {
   color:var(--light-grey);
 }
 
+.container-search{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  height: 4rem;
+}
+.input-btn-wrapper{
+  display:flex;
+  align-items:center;
+}
+
+.btn-search{
+  width:2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border:none;
+  margin:0.5rem 1rem 0 1rem;
+  background-color: transparent;
+}
+
+.search{
+  background-image: url(./images/pesquisa.svg);
+}
+
+.goBack{
+  background-image: url(./images/return.svg); 
+}
+
+.inative-input{
+  display:none;
+}
+
+.active-input{
+  display:inline-block;
+  height: 2.5rem;
+  width: 17rem;
+  border:none;
+  background: #D4DDCE;
+  border-radius: 6px;
+  padding: 0 1rem 0 1rem;
+  color:dark-grey
+ 
+}
+
+.active-input::placeholder {
+  color: var(--dark-green);
+  text-align: center;
+}
+
+.active-input:hover {
+  border: 1px solid var(--dark-green);
+  outline:none;
+}
+
+.no-employee-container{
+  justify-self: left;
+}
+
+.no-employee{
+  color:var(--dark-green);
+  margin-left:2rem;
+}
 
