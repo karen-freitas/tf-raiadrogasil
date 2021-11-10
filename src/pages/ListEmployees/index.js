@@ -112,7 +112,7 @@ export default function ListEmployees() {
   return (
     <>
       <Header
-        name="Empregados"
+        name="Colaboradores"
       />
 
       {activeProfile ? <TesteProfile data={employeeSelected} onClick={handleCloseProfile} deleteEmployee={() => handleDeleteEmployee(employeeSelected)} /> :
