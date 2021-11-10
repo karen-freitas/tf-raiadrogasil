@@ -1,16 +1,16 @@
 import React from 'react';
 import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
-import { Button } from '@mui/material';
 import BasicModal from '../../components/modals/modals';
-
-
 import Header from '../../components/Header/Header.js';
-
 import { registerEmployee } from '../../services/firebase';
-import '../../styles/register.css'
+import '../../styles/register.css';
+import { useNavigate } from 'react-router-dom';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 export default function Register() {
+  const [showModal, setShowModal] = useState(false);
   const [values, setValues] = useState({
     name: '',
     lastName: '',
@@ -21,8 +21,6 @@ export default function Register() {
     role: '',
   });
 
-  const [showModal, setShowModal] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -31,20 +29,19 @@ export default function Register() {
     });
   };
 
+  const navigate = useNavigate();
+  const routerHome = () => navigate('/');
+
   const register = () => {
     registerEmployee(values)
-      // .then((data) => console.log(data))
       .then(() => setShowModal(true))
       .catch((error) => console.log(error));
     setShowModal(true);
   };
 
-
   return (
     <>
-      <Header
-        name="Cadastro"
-      />
+      <Header name="Cadastro" />
       <div className="form-area">
         <FormPropsTextFields
           id="name"
@@ -53,8 +50,10 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.name === ""}
-          helperText={values.name === "" ? 'Por favor, preencha o seu nome' : ""}
+          error={values.name === ''}
+          helperText={
+            values.name === '' ? 'Por favor, preencha o seu nome' : ''
+          }
         />
         <FormPropsTextFields
           id="last-name"
@@ -63,8 +62,10 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.lastName === ""}
-          helperText={values.lastName === "" ? 'Por favor, preencha o seu sobrenome' : ""}
+          error={values.lastName === ''}
+          helperText={
+            values.lastName === '' ? 'Por favor, preencha o seu sobrenome' : ''
+          }
         />
         <FormPropsTextFields
           id="email"
@@ -73,8 +74,10 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="email"
-          error={values.email === ""}
-          helperText={values.email === "" ? 'Por favor, preencha o seu e-mail' : ""}
+          error={values.email === ''}
+          helperText={
+            values.email === '' ? 'Por favor, preencha o seu e-mail' : ''
+          }
         />
         <FormPropsTextFields
           id="phone"
@@ -83,8 +86,10 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.phone === ""}
-          helperText={values.phone === "" ? 'Por favor, preencha com o seu telefone' : ""}
+          error={values.phone === ''}
+          helperText={
+            values.phone === '' ? 'Por favor, preencha com o seu telefone' : ''
+          }
         />
         <FormPropsTextFields
           id="address"
@@ -93,8 +98,12 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.address === ""}
-          helperText={values.address === "" ? 'Por favor, preencha com o seu endereço' : ""}
+          error={values.address === ''}
+          helperText={
+            values.address === ''
+              ? 'Por favor, preencha com o seu endereço'
+              : ''
+          }
         />
         <FormPropsTextFields
           id="cep"
@@ -103,8 +112,10 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.cep === ""}
-          helperText={values.cep === "" ? 'Por favor, preencha com o seu CEP' : ""}
+          error={values.cep === ''}
+          helperText={
+            values.cep === '' ? 'Por favor, preencha com o seu CEP' : ''
+          }
         />
         <FormPropsTextFields
           id="role"
@@ -113,15 +124,31 @@ export default function Register() {
           className=""
           onChange={handleChange}
           type="text"
-          error={values.role === ""}
-          helperText={values.role === "" ? 'Por favor, preencha com o sua função' : ""}
+          error={values.role === ''}
+          helperText={
+            values.role === '' ? 'Por favor, preencha com o sua função' : ''
+          }
         />
       </div>
-      <Button onClick={() => register()}>Cadastrar</Button>
-      <BasicModal showModal={showModal} setShowModal={setShowModal}>
-        <p>Cadastrado com sucesso!</p>
-      </BasicModal>
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        alignItems="flex-end">
+        <Button onClick={register} variant="contained" color="success">
+          Cadastrar
+        </Button>
+      </Stack>
 
+      <BasicModal showModal={showModal} setShowModal={setShowModal}>
+        <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
+          Cadastrado com sucesso!
+        </p>
+
+        <Button onClick={routerHome} variant="contained" color="success">
+          OK
+        </Button>
+      </BasicModal>
     </>
   );
 }
