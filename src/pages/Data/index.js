@@ -13,7 +13,7 @@ export default function Data() {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployeesList(newEmployees);
-     
+
     });
   }, []);
 
@@ -22,10 +22,10 @@ export default function Data() {
 
   const male = employees.filter((employee) => employee.gender === 'Masculino');
   const maleQuantity = male.length;
- 
+
   const female = employees.filter((employee) => employee.gender === 'Feminino');
   const femaleQuantity = female.length;
-  
+
   const white = employees.filter((employee) => employee.color === 'Branca');
   const whiteQuantity = white.length;
 
@@ -81,7 +81,7 @@ export default function Data() {
         <h2 className="title-data">Veja as estatísticas:</h2>
       </div>
       <div
-      
+
         className="container-charts">
         <div className="chartBox">
           <Pie
@@ -262,7 +262,7 @@ export default function Data() {
         chartType="ColumnChart"
         loader={<div>Loading Chart</div>}
         data={employees
-          
+
         }
         options={{
           title: 'Population of Largest U.S. Cities',

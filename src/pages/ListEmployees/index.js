@@ -56,7 +56,7 @@ export default function ListEmployees() {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployees(newEmployees);
-   
+
     });
   }, []);
 
@@ -89,7 +89,7 @@ export default function ListEmployees() {
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
-   
+
     {
       field: 'details',
       headerName: 'Ações',
