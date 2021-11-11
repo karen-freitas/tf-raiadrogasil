@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { listEmployee } from '../../services/firebase';
 import Header from '../../components/Header/Header.js';
 
-import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
+import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 
 export default function Data() {
   const [employeesList, setEmployeesList] = useState([]);
