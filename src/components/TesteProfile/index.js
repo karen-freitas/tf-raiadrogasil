@@ -27,6 +27,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     district: data.district,
     city: data.city,
     state: data.state,
+    gender:data.gender,
   });
 
   const handleBlurCep = (e) => {
@@ -63,6 +64,21 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
       [name]: value,
     });
   };
+
+
+  const gender = [{
+
+    value: 'homem'
+  },
+  {
+
+    value: 'mulher'
+  },
+
+
+
+
+  ]
 
   return (
     <>
@@ -184,6 +200,21 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           type="text"
           disabled={disableInput}
         />
+
+        <select
+          id="gender"
+          onChange={handleChange}
+          className="select"
+          value={values.gender}
+          name="gender"
+          disabled={disableInput}
+        >
+          {gender.map(({ value, id, hidden }) => (
+            <option key={id} value={value} hidden={hidden}>
+              {value}
+            </option>
+          ))}
+        </select>
       </div>
       <Stack
         direction="row"
@@ -194,6 +225,8 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         justifyContent="end"
         alignItems="center"
       >
+
+        
         <BasicModal
           popupText={popUpText}
           showModal={showModal}

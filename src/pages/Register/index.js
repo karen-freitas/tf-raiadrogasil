@@ -93,6 +93,22 @@ export default function Register() {
         }
       });
   };
+  
+
+
+  const options = [ {    
+
+    label: 'Mulher cisgênera'
+      },
+    {
+
+      value: 'mulher'
+    },
+
+
+   
+  
+  ]
 
   return (
     <>
@@ -231,17 +247,19 @@ export default function Register() {
           }
         />
 
-        <Autocomplete
-          id="sexo"
-          name="gender"
-          options={gender}
-          value={values.gender}
+        <select
+          id="gender"
           onChange={handleChange}
-          getOptionLabel={(option) => option.title}
-          style={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Combo box" defaultValue="The Godfather" variant="outlined" />}
-        />
-
+          className="select"
+          value={values.options}
+          name="gender"
+        >
+          {options.map(({ value, id, hidden }) => (
+            <option key={id} value={value} hidden={hidden}>
+              {value}
+            </option>
+          ))}
+        </select>
                        
       </div>
       <Stack
