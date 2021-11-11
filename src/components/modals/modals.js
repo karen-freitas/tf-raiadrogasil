@@ -32,7 +32,10 @@ export function BasicModal({
           <p style={{ color: 'green', fontSize: '1.5em', textAlign: 'center' }}>
             {popupText}
           </p>
-          <Button onClick={onClick} variant="contained" color="success">
+          <Button
+            onClick={onClick || handleClose}
+            variant="contained"
+            color="success">
             OK
           </Button>
         </Box>
