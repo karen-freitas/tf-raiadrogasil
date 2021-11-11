@@ -1,3 +1,5 @@
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
-    -webkit-text-fill-color: black;
+.container-return {
+  display: flex;
+  justify-content: end;
+  width: 100%;
 }

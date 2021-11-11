@@ -57,8 +57,8 @@ export default function Register() {
   };
 
   const handleBlurCep = (e) => {
-    const value = Number(e.target.value);
-    if (value >= 10000000 && value < 99999999) {
+    const value = e.target.value;
+    if (value.length === 8) {
       dataCEP(value);
     } else {
       alert('O cep é inválido: ' + e.target.value);
@@ -69,10 +69,7 @@ export default function Register() {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((json) => json.json())
       .then((response) => {
-        console.log(response);
-
         if (!response.erro) {
-          console.log(response.localidade);
           setValues({
             ...values,
             address: response.logradouro,
@@ -226,8 +223,14 @@ export default function Register() {
       <Stack
         direction="row"
         spacing={2}
+        width="100%"
+        display="flex"
+        flex-direction="row"
         justifyContent="center"
-        alignItems="flex-end">
+        align-items="center"
+        width="100%"
+        height="10vh"
+        >
         <Button
           onClick={() => {
             register();

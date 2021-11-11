@@ -3,13 +3,10 @@ import { useState, useEffect } from 'react';
 import { listEmployee, deleteEmployee } from '../../services/firebase';
 import TesteProfile from '../../components/TesteProfile';
 import Header from '../../components/Header/Header.js';
-
-import { DataGrid } from '@material-ui/data-grid';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
@@ -105,7 +102,7 @@ export default function ListEmployees() {
   ];
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -145,7 +142,6 @@ export default function ListEmployees() {
 
   const onChange = (e) => {
     setSearch(e.target.value);
-    console.log(search);
   };
 
   const clickSearch = () => {
@@ -192,22 +188,22 @@ export default function ListEmployees() {
               <p className="no-employee">{searchText}</p>
             </div>
             <div className="input-btn-wrapper">
-            <input
-              className={classInput}
-              type="text"
-              placeholder="Pesquisar"
-              value={search}
-              name="search"
-              onChange={onChange}></input>
-            <span class="input-group-btn">
-              <button
-                className={`btn-search ${classButton}`}
-                onClick={clickSearch}></button>
-            </span>
+              <input
+                className={classInput}
+                type="text"
+                placeholder="Pesquisar"
+                value={search}
+                name="search"
+                onChange={onChange}></input>
+              <span className="input-group-btn">
+                <button
+                  className={`btn-search ${classButton}`}
+                  onClick={clickSearch}></button>
+              </span>
             </div>
           </div>
 
-          <TableContainer sx={{ maxHeight: 500 }}>
+          <TableContainer sx={{ maxHeight: 600 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead
                   className={classes.header}>
@@ -257,7 +253,7 @@ export default function ListEmployees() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[8, 25, 100]}
+            rowsPerPageOptions={[10, 25, 100]}
             component="div"
             count={employees.length}
             rowsPerPage={rowsPerPage}
@@ -267,7 +263,7 @@ export default function ListEmployees() {
             className={classes.row}
           />
         </Paper>
-        )}
+      )}
     </>
   );
 }

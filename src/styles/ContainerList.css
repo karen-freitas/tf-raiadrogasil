@@ -1,8 +1,8 @@
 .container-list {
     background: var(--light-grey);
     width: 92%;
-    min-height: 90vh;
-    height:auto;
+    height: 90vh;
+    /*height:auto;*/
     padding: 1.5rem;
     margin: 2rem;
     border-radius: 30px;
@@ -11,6 +11,5 @@
     flex-direction: column;
     align-items: center;
     align-content: space-around;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
-
