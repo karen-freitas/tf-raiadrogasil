@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Loader from '../../components/Loader/index.js';
 
 const colors = ['Amarela', 'Branca', 'Indígena', 'Parda', 'Preta', 'Outra'];
 
@@ -39,6 +40,8 @@ export default function Register() {
 
   const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
   const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
+
+  const [loading, setLoading] = useState(false);
 
   const [values, setValues] = useState({
     name: '',
@@ -107,13 +110,16 @@ export default function Register() {
 
   const register = () => {
     if (isFormValid()) {
+      setLoading(true);
       registerEmployee(values)
         .then(() => {
+         
           setShowModalValidForm(true);
         })
         .catch(() => {
           setPopUpText('Não foi possível realizar o cadastro');
           setShowModalInvalidForm(true);
+          
         });
     } else {
       setPopUpText('Formulário precisa ser válido');
@@ -156,6 +162,7 @@ export default function Register() {
 
   return (
     <>
+      {loading ? <Loader /> : false}
       <Header name="Cadastro" />
       <div className="form-area">
         <FormPropsTextFields
