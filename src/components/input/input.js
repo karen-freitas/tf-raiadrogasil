@@ -20,7 +20,7 @@ export default function FormPropsTextFields({
         sx={{
           display: 'flex',
           alignItems: 'center',
-          margin: '0.75rem',
+          margin: '0.4rem',
           width: '20rem',
           '& > :not(style)': { m: 1 },
         }}>

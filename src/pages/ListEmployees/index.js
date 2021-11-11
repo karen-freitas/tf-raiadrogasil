@@ -26,7 +26,11 @@ export default function ListEmployees() {
       'background-color': '#d5d9de',
       color: '#404040',
     },
+    header: {
+      'border-radius': '0.5rem',
+    },
     row: {
+      'background-color': '#f2f2f2',
       color: '#404040',
     },
     container: {
@@ -174,7 +178,7 @@ export default function ListEmployees() {
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
         />
       ) : (
-        <Paper sx={{ width: '95%' }}>
+        <Paper sx={{ width: '95%', boxShadow: 0 }}>
           <div className="container-search">
             <div className="no-employee-container">
               <p className="no-employee">{searchText}</p>
@@ -251,6 +255,7 @@ export default function ListEmployees() {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            className={classes.row}
           />
         </Paper>
       )}
