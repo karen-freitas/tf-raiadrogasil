@@ -13,35 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import '../../styles/testeProfile.css'
-import { Box } from '@mui/system';
 import icon from '../../images/avatar.png';
-
-
-
-const colors = [
-  "Amarela",
-  "Branca",
-  "Indígena",
-  "Parda",
-  "Preta",
-  "Outra",
-]
-
-const deficiency = [
-  'Nenhuma',
-  'Visual',
-  'Auditiva',
-  'Visual',
-  'Física',
-  'Intelectual',
-  'Outra'
-];
-
-const gender = [
-  'Feminino',
-  'Masculino',
-  'Não informado'
-];
 
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [showModal, setShowModal] = useState(false);
@@ -101,7 +73,6 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     });
   };
 
-
   return (
     <>
       <div className="container-return">
@@ -111,15 +82,21 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
       </div>
 
       <Stack
-        direction="column"
+        direction="row"
         spacing={2}
         display="flex"
         width="100%"
         justifyContent="center"
         alignItems="center">
-        <h2>{values.name}</h2>
-        <h4>{values.role}</h4>
         <img src={icon} alt="Avatar" />
+        <div>
+          <div>
+            <h2>{values.name}</h2>
+          </div>
+          <div>
+            <h4>{values.role}</h4>
+          </div>
+        </div>
       </Stack>
       <div className="form-area">
         <FormPropsTextFields
@@ -233,6 +210,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           disabled={disableInput}
           type="text"
         />
+
         <FormControl sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
           <Select
@@ -296,8 +274,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         marginTop="10rem"
         width="100%"
         justifyContent="end"
-        alignItems="center"
-      >        
+        alignItems="center">
         <BasicModal
           popupText={popUpText}
           showModal={showModal}
