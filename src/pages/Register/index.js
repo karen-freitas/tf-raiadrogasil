@@ -15,6 +15,10 @@ import FormControl from '@mui/material/FormControl';
 export default function Register() {
   const [valuesError, setValuesError] = useState({});
 
+  const [popUpText, setPopUpText] = useState('');
+  const [showModalInvalidForm, setShowModalInvalidForm] = useState(false);
+  const [showModalValidForm, setShowModalValidForm] = useState(false);
+
   const [values, setValues] = useState({
     name: '',
     lastName: '',
