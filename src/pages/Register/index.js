@@ -38,7 +38,6 @@ const gender = [
 
 export default function Register() {
   const [showModal, setShowModal] = useState(false);
-  const [popUpText, setPopUpText] = useState('');
   const [valuesError, setValuesError] = useState({});
   const [value, setValue] = React.useState(colors[0]);
   const [inputValue, setInputValue] = React.useState('');
@@ -53,6 +52,7 @@ export default function Register() {
     name: '',
     lastName: '',
     phone: '',
+    email: '',
     cep: '',
     address: '',
     number: '',
@@ -71,56 +71,89 @@ export default function Register() {
       ...values,
       [name]: value,
     });
+
     inputValidation(name, value);
   };
 
-  const inputValidation = (inputName, inputValue) => {
-    let isInvalid = inputValue === '';
+  const isInputValid = (inputName, inputValue) => {
+    let hasError = !inputValue || inputValue === '';
+
     if (inputName === 'email') {
-      isInvalid = !/\S+@\S+\.\S+/.test(inputValue);
+      hasError = !/\S+@\S+\.\S+/.test(inputValue);
     }
+
+    if (inputName === 'cep' && inputValue.length !== 8) {
+      hasError = true;
+    }
+
+    return !hasError;
+  };
+
+  const inputValidation = (inputName, inputValue) => {
+    let hasError = !isInputValid(inputName, inputValue);
+
     setValuesError({
       ...valuesError,
-      [inputName]: isInvalid,
+      [inputName]: hasError,
     });
 
+    return hasError;
   };
 
   const navigate = useNavigate();
   const routerHome = () => navigate('/');
 
+  const isFormValid = () => {
+    let isValid = true;
+    const keysInputs = Object.keys(values);
+
+    keysInputs.forEach((key) => {
+      isValid = isValid && isInputValid(key, values[key]);
+    });
+    return isValid;
+  };
+
   const register = () => {
-    registerEmployee(values)
-      .then(() => setShowModal(true))
-      .catch((error) => console.log(error));
-    setShowModal(true);
+    if (isFormValid()) {
+      registerEmployee(values)
+        .then(() => setShowModal(true))
+        .catch((error) => alert(error.message));
+    } else {
+      alert('Formulário precisa ser válido');
+    }
   };
 
   const handleBlurCep = (e) => {
     const value = e.target.value;
-    if (value.length === 8) {
-      dataCEP(value);
-    } else {
-      alert('O cep é inválido: ' + e.target.value);
-    }
+    dataCEP(value);
   };
 
   const dataCEP = (cep) => {
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((json) => json.json())
-      .then((response) => {
-        if (!response.erro) {
-          setValues({
-            ...values,
-            address: response.logradouro,
-            district: response.bairro,
-            city: response.localidade,
-            state: response.uf,
-          });
-        } else {
-          alert('CEP inválido');
-        }
+    if (cep.length === 8) {
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((json) => json.json())
+        .then((response) => {
+          if (!response.erro) {
+            setValues({
+              ...values,
+              address: response.logradouro,
+              district: response.bairro,
+              city: response.localidade,
+              state: response.uf,
+            });
+          } else {
+            setValuesError({
+              ...valuesError,
+              cep: true,
+            });
+          }
+        });
+    } else {
+      setValuesError({
+        ...valuesError,
+        cep: true,
       });
+    }
   };
 
   return (
@@ -191,7 +224,9 @@ export default function Register() {
           onChange={handleChange}
           type="number"
           error={valuesError.cep}
-          helperText={valuesError.cep && 'Por favor, preencha com o seu CEP'}
+          helperText={
+            valuesError.cep && 'Por favor, preencha com um CEP válido'
+          }
           onBlur={handleBlurCep}
         />
         <FormPropsTextFields
@@ -326,9 +361,7 @@ export default function Register() {
         alignItems="flex-end">
         <Button
           onClick={() => {
-            register()
-            setShowModal(true);
-            setPopUpText('Cadastro realizado com sucesso!');
+            register();
           }}
           variant="contained"
           color="success">
@@ -339,7 +372,7 @@ export default function Register() {
       <BasicModal
         showModal={showModal}
         setShowModal={setShowModal}
-        popupText={popUpText}
+        popupText="Cadastro realizado com sucesso!"
         onClick={routerHome}
       />
     </>

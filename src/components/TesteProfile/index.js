@@ -11,6 +11,7 @@ import { updateEmployeeProfile } from '../../services/firebase';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import '../../styles/testeProfile.css'
+import icon from '../../images/avatar.png';
 
 const colors = [
   "Amarela",
@@ -112,6 +113,17 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         </Button>
       </div>
 
+      <Stack
+        direction="column"
+        spacing={2}
+        display="flex"
+        width="100%"
+        justifyContent="center"
+        alignItems="center">
+        <h2>{values.name}</h2>
+        <h4>{values.role}</h4>
+        <img src={icon} alt="Avatar" />
+      </Stack>
       <div className="form-area">
         <FormPropsTextFields
           id="name"
@@ -274,8 +286,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         marginTop="10rem"
         width="100%"
         justifyContent="end"
-        alignItems="center"
-      >
+        alignItems="center">
         <BasicModal
           popupText={popUpText}
           showModal={showModal}
@@ -292,9 +303,9 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
                 values.lastName,
                 values.email,
                 values.phone,
-                values.role,
-                values.cep,
                 values.address,
+                values.cep,
+                values.role,
                 values.number,
                 values.district,
                 values.city,
@@ -306,8 +317,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
               setShowModal(true);
               setPopUpText('Perfil do funcionário atualizado com sucesso!');
             }
-          }}
-        >
+          }}>
           {disableInput ? <EditButton /> : <SaveButton />}
         </Button>
         <DeleteModal
@@ -320,8 +330,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           onClick={() => {
             setShowModalDelete(true);
             setPopUpText('Gostaria de confirmar a exclusão do funcionário?');
-          }}
-        >
+          }}>
           <DeleteButton />
         </Button>
       </Stack>
