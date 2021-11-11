@@ -10,17 +10,10 @@ import Button from '@mui/material/Button';
 import { updateEmployeeProfile } from '../../services/firebase';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import '../../styles/testeProfile.css'
+import '../../styles/testeProfile.css';
 import icon from '../../images/avatar.png';
 
-const colors = [
-  "Amarela",
-  "Branca",
-  "Indígena",
-  "Parda",
-  "Preta",
-  "Outra",
-]
+const colors = ['Amarela', 'Branca', 'Indígena', 'Parda', 'Preta', 'Outra'];
 
 const deficiency = [
   'Nenhuma',
@@ -29,14 +22,10 @@ const deficiency = [
   'Visual',
   'Física',
   'Intelectual',
-  'Outra'
+  'Outra',
 ];
 
-const gender = [
-  'Feminino',
-  'Masculino',
-  'Não informado'
-];
+const gender = ['Feminino', 'Masculino', 'Não informado'];
 
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [showModal, setShowModal] = useState(false);
@@ -69,7 +58,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     gender: data.gender,
     deficiency: data.deficiency,
   });
- 
+
   const handleBlurCep = (e) => {
     const value = e.target.value;
     if (value.length === 8) {
@@ -114,15 +103,21 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
       </div>
 
       <Stack
-        direction="column"
+        direction="row"
         spacing={2}
         display="flex"
         width="100%"
         justifyContent="center"
         alignItems="center">
-        <h2>{values.name}</h2>
-        <h4>{values.role}</h4>
         <img src={icon} alt="Avatar" />
+        <div>
+          <div>
+            <h2>{values.name}</h2>
+          </div>
+          <div>
+            <h4>{values.role}</h4>
+          </div>
+        </div>
       </Stack>
       <div className="form-area">
         <FormPropsTextFields
@@ -276,7 +271,9 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           id="controllable-states-demo"
           options={deficiency}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Deficiência" />}
+          renderInput={(params) => (
+            <TextField {...params} label="Deficiência" />
+          )}
         />
       </div>
       <Stack
