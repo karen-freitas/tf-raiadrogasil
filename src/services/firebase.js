@@ -21,7 +21,10 @@ export const updateEmployeeProfile = (
   newNumber,
   newDistrict,
   newCity,
-  newState
+  newState,
+  newColor,
+  newGender,
+  newDeficiency,
 ) =>
   db.collection('employees').doc(id).update({
     name: newName,
@@ -35,6 +38,9 @@ export const updateEmployeeProfile = (
     district: newDistrict,
     city: newCity,
     state: newState,
+    color: newColor,
+    gender: newGender,
+    deficiency: newDeficiency,
   });
 
 export const listEmployee = () => db.collection('employees').orderBy('name', 'asc').get();
