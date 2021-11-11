@@ -7,25 +7,13 @@ import { ReactComponent as SaveButton } from '../../images/button_save.svg';
 import { ReactComponent as ReturnButton } from '../../images/return.svg';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { updateEmployeeProfile } from '../../services/firebase';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import '../../styles/testeProfile.css';
+import { updateEmployeeProfile } from '../../services/firebase'
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import '../../styles/testeProfile.css'
 import icon from '../../images/avatar.png';
-
-const colors = ['Amarela', 'Branca', 'Indígena', 'Parda', 'Preta', 'Outra'];
-
-const deficiency = [
-  'Nenhuma',
-  'Visual',
-  'Auditiva',
-  'Visual',
-  'Física',
-  'Intelectual',
-  'Outra',
-];
-
-const gender = ['Feminino', 'Masculino', 'Não informado'];
 
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [showModal, setShowModal] = useState(false);
@@ -33,27 +21,18 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [popUpText, setPopUpText] = useState('');
   const [disableInput, setDisableInput] = useState(true);
 
-  const [value, setValue] = React.useState(colors[0]);
-  const [inputValue, setInputValue] = React.useState('');
-
-  const [valueGender, setValueGender] = React.useState(gender[0]);
-  const [inputValueGender, setInputValueGender] = React.useState('');
-
-  const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
-  const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
-
   const [values, setValues] = useState({
     name: data.name,
     lastName: data.lastName,
     email: data.email,
     phone: data.phone,
-    role: data.role,
     cep: data.cep,
     address: data.address,
     number: data.number,
     district: data.district,
     city: data.city,
     state: data.state,
+    role: data.role,
     color: data.color,
     gender: data.gender,
     deficiency: data.deficiency,
@@ -123,63 +102,63 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         <FormPropsTextFields
           id="name"
           name="name"
+          value={values.name}
           label="Nome"
           className=""
-          type="text"
-          value={values.name}
           onChange={handleChange}
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
-          id="lastName"
+          id="last-name"
           name="lastName"
+          value={values.lastName}
           label="Sobrenome"
           className=""
-          type="text"
-          value={values.lastName}
           onChange={handleChange}
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
           id="email"
           name="email"
+          value={values.email}
           label="E-mail"
           className=""
-          type="email"
-          value={values.email}
           onChange={handleChange}
           disabled={disableInput}
+          type="email"
         />
         <FormPropsTextFields
           id="phone"
           name="phone"
+          value={values.phone}
           label="Telefone"
           className=""
-          type="text"
-          value={values.phone}
           onChange={handleChange}
           disabled={disableInput}
+          type="number"
         />
         <FormPropsTextFields
           id="role"
           name="role"
+          value={values.role}
           label="Função"
           className=""
-          type="text"
-          value={values.role}
           onChange={handleChange}
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
           id="cep"
           name="cep"
-          label="CEP (somente números)"
+          value={values.cep}
+          label="CEP"
           className=""
           onChange={handleChange}
-          type="text"
-          value={values.cep}
-          onBlur={handleBlurCep}
           disabled={disableInput}
+          type="number"
+          onBlur={handleBlurCep}
         />
         <FormPropsTextFields
           id="address"
@@ -188,8 +167,8 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           label="Endereço"
           className=""
           onChange={handleChange}
-          type="text"
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
           id="number"
@@ -198,8 +177,8 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           label="Número"
           className=""
           onChange={handleChange}
-          type="text"
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
           id="district"
@@ -208,8 +187,8 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           label="Bairro"
           className=""
           onChange={handleChange}
-          type="text"
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
           id="city"
@@ -218,8 +197,8 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           label="Cidade"
           className=""
           onChange={handleChange}
-          type="text"
           disabled={disableInput}
+          type="text"
         />
         <FormPropsTextFields
           id="state"
@@ -228,53 +207,65 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           label="Estado"
           className=""
           onChange={handleChange}
-          type="text"
           disabled={disableInput}
+          type="text"
         />
-        <Autocomplete
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={colors}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Cor" />}
-        />
-        <Autocomplete
-          value={valueGender}
-          onChange={(event, newValue) => {
-            setValueGender(newValue);
-          }}
-          inputValue={inputValueGender}
-          onInputChange={(event, newInputValue) => {
-            setInputValueGender(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={gender}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Gênero" />}
-        />
-        <Autocomplete
-          value={valueDeficiency}
-          onChange={(event, newValue) => {
-            setValueDeficiency(newValue);
-          }}
-          inputValue={inputValueDeficiency}
-          onInputChange={(event, newInputValue) => {
-            setInputValueDeficiency(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={deficiency}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Deficiência" />
-          )}
-        />
+
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="color"
+            value={values.color}
+            label="Color"
+            onChange={handleChange}
+            disabled={disableInput}
+          >
+            <MenuItem value="Amarela">Amarela</MenuItem>
+            <MenuItem value="Branca">Branca</MenuItem>
+            <MenuItem value="Indígena">Indígena</MenuItem>
+            <MenuItem value="Preta">Preta</MenuItem>
+            <MenuItem value="Parda">Parda</MenuItem>
+            <MenuItem value="Outra">Outra</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Deficiência</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="deficiency"
+            value={values.deficiency}
+            label="Deficiência"
+            onChange={handleChange}
+            disabled={disableInput}
+          >
+            <MenuItem value="Nenhuma">Nenhuma</MenuItem>
+            <MenuItem value="Visual">Visual</MenuItem>
+            <MenuItem value="Auditiva">Auditiva</MenuItem>
+            <MenuItem value="Visual">Visual</MenuItem>
+            <MenuItem value="Física">Física</MenuItem>
+            <MenuItem value="Intelectual">Intelectual</MenuItem>
+            <MenuItem value="Outra">Outra</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Gênero</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="gender"
+            value={values.gender}
+            label="Gênero"
+            onChange={handleChange}
+            disabled={disableInput}
+          >
+            <MenuItem value="Feminino">Feminino</MenuItem>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Não informado">Não informado</MenuItem>
+          </Select>
+        </FormControl>
       </div>
       <Stack
         direction="row"
@@ -300,16 +291,16 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
                 values.lastName,
                 values.email,
                 values.phone,
-                values.address,
                 values.cep,
-                values.role,
+                values.address,
                 values.number,
                 values.district,
                 values.city,
                 values.state,
-                value,
-                valueGender,
-                valueDeficiency,
+                values.role,
+                values.color,
+                values.gender,
+                values.deficiency,
               );
               setShowModal(true);
               setPopUpText('Perfil do funcionário atualizado com sucesso!');
