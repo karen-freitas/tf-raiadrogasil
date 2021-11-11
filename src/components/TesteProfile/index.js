@@ -211,7 +211,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           type="text"
         />
 
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 1, width: '20rem' }}>
           <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -230,7 +230,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
             <MenuItem value="Outra">Outra</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 1, width: '20rem' }}>
           <InputLabel id="demo-simple-select-helper-label">Deficiência</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -250,7 +250,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
             <MenuItem value="Outra">Outra</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 1, width: '20rem' }}>
           <InputLabel id="demo-simple-select-helper-label">Gênero</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -271,7 +271,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         direction="row"
         spacing={2}
         display="flex"
-        marginTop="10rem"
+        marginTop="1rem"
         width="100%"
         justifyContent="end"
         alignItems="center">
