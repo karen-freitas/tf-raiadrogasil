@@ -82,15 +82,21 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
       </div>
 
       <Stack
-        direction="column"
+        direction="row"
         spacing={2}
         display="flex"
         width="100%"
         justifyContent="center"
         alignItems="center">
-        <h2>{values.name}</h2>
-        <h4>{values.role}</h4>
         <img src={icon} alt="Avatar" />
+        <div>
+          <div>
+            <h2>{values.name}</h2>
+          </div>
+          <div>
+            <h4>{values.role}</h4>
+          </div>
+        </div>
       </Stack>
       <div className="form-area">
         <FormPropsTextFields
@@ -204,6 +210,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           disabled={disableInput}
           type="text"
         />
+
         <FormControl sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
           <Select
