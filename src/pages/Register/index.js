@@ -34,7 +34,7 @@ export default function Register() {
     gender: '',
     deficiency: '',
   });
-  console.log('values', values);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -247,6 +247,7 @@ export default function Register() {
             <MenuItem value="Amarela">Amarela</MenuItem>
             <MenuItem value="Branca">Branca</MenuItem>
             <MenuItem value="Indígena">Indígena</MenuItem>
+            <MenuItem value="Preta">Preta</MenuItem>
             <MenuItem value="Parda">Parda</MenuItem>
             <MenuItem value="Outra">Outra</MenuItem>
           </Select>
