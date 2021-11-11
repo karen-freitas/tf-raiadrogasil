@@ -333,7 +333,9 @@ export default function Register() {
         direction="row"
         spacing={2}
         justifyContent="center"
-        alignItems="flex-end">
+        alignItems="flex-end"
+        padding={2}
+        >
         <Button
           onClick={() => {
             register();
