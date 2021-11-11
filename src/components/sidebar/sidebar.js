@@ -16,6 +16,7 @@ const Sidebar = ({ children, onClick }) => {
   const navigate = useNavigate();
   const routerRegister = () => navigate('/cadastro');
   const routerList = () => navigate('/');
+  const routerData = () => navigate('/dados');
 
 
   return (
@@ -30,7 +31,7 @@ const Sidebar = ({ children, onClick }) => {
         <Button className="button-group-icon" onClick={routerList}>
           <img className="group-icon" label="Voltar Lista" src={lista} alt="group" />
         </Button>
-        <Button className="button-group-icon" onClick={routerList}>
+        <Button className="button-group-icon" onClick={routerData}>
           <img className="group-icon" label="Grafico" src={estatis} alt="group" />
         </Button>
 

@@ -5,6 +5,8 @@
   width: auto;
   margin-top: 1rem;
   margin-left: 5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
