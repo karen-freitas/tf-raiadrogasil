@@ -11,14 +11,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const colors = [
-  "Amarela",
-  "Branca",
-  "Indígena",
-  "Parda",
-  "Preta",
-  "Outra",
-]
+const colors = ['Amarela', 'Branca', 'Indígena', 'Parda', 'Preta', 'Outra'];
 
 const deficiency = [
   'Nenhuma',
@@ -27,20 +20,19 @@ const deficiency = [
   'Visual',
   'Física',
   'Intelectual',
-  'Outra'
+  'Outra',
 ];
 
-const gender = [
-  'Feminino',
-  'Masculino',
-  'Não informado'
-];
+const gender = ['Feminino', 'Masculino', 'Não informado'];
 
 export default function Register() {
-  const [showModal, setShowModal] = useState(false);
   const [valuesError, setValuesError] = useState({});
   const [value, setValue] = React.useState(colors[0]);
   const [inputValue, setInputValue] = React.useState('');
+
+  const [popUpText, setPopUpText] = useState('');
+  const [showModalInvalidForm, setShowModalInvalidForm] = useState(false);
+  const [showModalValidForm, setShowModalValidForm] = useState(false);
 
   const [valueGender, setValueGender] = React.useState(gender[0]);
   const [inputValueGender, setInputValueGender] = React.useState('');
@@ -116,10 +108,16 @@ export default function Register() {
   const register = () => {
     if (isFormValid()) {
       registerEmployee(values)
-        .then(() => setShowModal(true))
-        .catch((error) => alert(error.message));
+        .then(() => {
+          setShowModalValidForm(true);
+        })
+        .catch(() => {
+          setPopUpText('Não foi possível realizar o cadastro');
+          setShowModalInvalidForm(true);
+        });
     } else {
-      alert('Formulário precisa ser válido');
+      setPopUpText('Formulário precisa ser válido');
+      setShowModalInvalidForm(true);
     }
   };
 
@@ -294,14 +292,13 @@ export default function Register() {
             valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
-       <Autocomplete
+        <Autocomplete
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
           inputValue={inputValue}
           onInputChange={(event, newInputValue) => {
-            
             setValues({
               ...values,
               color: newInputValue,
@@ -312,16 +309,14 @@ export default function Register() {
           options={colors}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Cor" />}
-        /> 
+        />
         <Autocomplete
           value={valueGender}
           onChange={(event, newValue) => {
             setValueGender(newValue);
           }}
           inputValue={inputValueGender}
-         
           onInputChange={(event, newInputValue) => {
-            
             setValues({
               ...values,
               gender: newInputValue,
@@ -339,9 +334,7 @@ export default function Register() {
             setValueDeficiency(newValue);
           }}
           inputValue={inputValueDeficiency}
-         
           onInputChange={(event, newInputValue) => {
-            
             setValues({
               ...values,
               deficiency: newInputValue,
@@ -351,7 +344,9 @@ export default function Register() {
           id="controllable-states-demo"
           options={deficiency}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Deficiência" />}
+          renderInput={(params) => (
+            <TextField {...params} label="Deficiência" />
+          )}
         />
       </div>
       <Stack
@@ -370,10 +365,15 @@ export default function Register() {
       </Stack>
 
       <BasicModal
-        showModal={showModal}
-        setShowModal={setShowModal}
+        showModal={showModalValidForm}
+        setShowModal={setShowModalValidForm}
         popupText="Cadastro realizado com sucesso!"
         onClick={routerHome}
+      />
+      <BasicModal
+        showModal={showModalInvalidForm}
+        setShowModal={setShowModalInvalidForm}
+        popupText={popUpText}
       />
     </>
   );
