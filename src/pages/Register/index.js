@@ -3,6 +3,7 @@ import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
 import { BasicModal } from '../../components/modals/modals';
 import Header from '../../components/Header/Header.js';
+import Loader from '../../components/Loader/index.js';
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +19,7 @@ export default function Register() {
   const [popUpText, setPopUpText] = useState('');
   const [showModalInvalidForm, setShowModalInvalidForm] = useState(false);
   const [showModalValidForm, setShowModalValidForm] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [values, setValues] = useState({
     name: '',
@@ -85,13 +87,16 @@ export default function Register() {
 
   const register = () => {
     if (isFormValid()) {
+      setLoading(true);
       registerEmployee(values)
         .then(() => {
+         
           setShowModalValidForm(true);
         })
         .catch(() => {
           setPopUpText('Não foi possível realizar o cadastro');
           setShowModalInvalidForm(true);
+          
         });
     } else {
       setPopUpText('Formulário precisa ser válido');
@@ -134,6 +139,7 @@ export default function Register() {
 
   return (
     <>
+      {loading ? <Loader /> : false}
       <Header name="Cadastro" />
       <div className="form-area">
         <FormPropsTextFields

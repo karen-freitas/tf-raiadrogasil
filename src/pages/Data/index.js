@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { listEmployee } from '../../services/firebase';
 import Header from '../../components/Header/Header.js';
+import Loader from '../../components/Loader/index.js';
+
 
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 
 export default function Data() {
   const [employeesList, setEmployeesList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     listEmployee().then((list) => {
       const newEmployees = [];
@@ -13,9 +17,13 @@ export default function Data() {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployeesList(newEmployees);
-
+      setTimeout(setLoading(false), 1000);
+      
+     
     });
   }, []);
+
+  
 
 
   const employees = [...employeesList]
@@ -76,7 +84,8 @@ export default function Data() {
 
   return (
     <>
-      <Header name="Nossos Dados" />
+      {loading ? <Loader /> : false}
+      <Header name="Mapa da diversidade" />
       <div className="container-title">
         <h2 className="title-data">Veja as estatísticas:</h2>
       </div>
@@ -91,7 +100,7 @@ export default function Data() {
                   // cria-se um vetor data, com os valores a ser dispostos no gráfico
                   data: [femaleQuantity, maleQuantity],
                   // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
-                  backgroundColor: ['#78C0B3', '#404040'],
+                  backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)'],
                 },
               ],
               // cria-se legendas para os respectivos valores do vetor data
@@ -182,7 +191,7 @@ export default function Data() {
               plugins: {
                 title: {
                   display: true,
-                  text: 'Cor ou raça',
+                  text: 'Raça ou Etnia',
                   color: '#285035',
                 },
               },

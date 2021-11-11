@@ -116,10 +116,13 @@ main {
   margin-left: 2rem;
 }
 
-.title-data {
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
-  color: var(--dark-green);
+.title-data{
+  font-size:1.5rem;
+  margin-bottom:3rem;
+  margin-left:0.5rem;
+  color:var(--dark-green);
+
+
 }
 
 .container-charts {
