@@ -4,191 +4,75 @@ import Header from '../../components/Header/Header.js';
 
 import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
 
-const employees = [
-  {
-    address: 'Adm',
-    cep: '38051510',
-    city: 'Uberaba',
-    details: 'Mais',
-    district: 'Residencial Nova Era',
-    email: 'ana@gmail.com',
-    id: 'qN3lEq4DKPnh3fXIvFUO',
-    lastName: 'Costa',
-    name: 'Ana',
-    number: '09',
-    phone: '19883921032002',
-    role: 'Rua Hilda Machado de Sene',
-    state: 'MG',
-    color: 'Branca',
-    gender: 'Feminino',
-    genderIdentity: 'Mulher cisgênera',
-    sexualOrientation: 'Heterossexual',
-    deficiency: 'Física',
-  },
-  {
-    address: 'Adm',
-    cep: '38051510',
-    city: 'Uberaba',
-    details: 'Mais',
-    district: 'Residencial Nova Era',
-    email: 'ana@gmail.com',
-    id: 'qN3lEq4DKPnh3fXIvFUO',
-    lastName: 'Costa',
-    name: 'Ana',
-    number: '09',
-    phone: '19883921032002',
-    role: 'Rua Hilda Machado de Sene',
-    state: 'MG',
-    color: 'Preta',
-    gender: 'Feminino',
-    genderIdentity: 'Mulher cisgênera',
-    sexualOrientation: 'Heterossexual',
-    deficiency: 'Não',
-  },
-  {
-    address: 'Adm',
-    cep: '38051510',
-    city: 'Uberaba',
-    details: 'Mais',
-    district: 'Residencial Nova Era',
-    email: 'ana@gmail.com',
-    id: 'qN3lEq4DKPnh3fXIvFUO',
-    lastName: 'Costa',
-    name: 'Ana',
-    number: '09',
-    phone: '19883921032002',
-    role: 'Rua Hilda Machado de Sene',
-    state: 'MG',
-    color: 'Branca',
-    gender: 'Masculino',
-    genderIdentity: 'Mulher cisgênera',
-    sexualOrientation: 'Heterossexual',
-    deficiency: 'Visual',
-  },
-  {
-    address: 'Adm',
-    cep: '38051510',
-    city: 'Uberaba',
-    details: 'Mais',
-    district: 'Residencial Nova Era',
-    email: 'ana@gmail.com',
-    id: 'qN3lEq4DKPnh3fXIvFUO',
-    lastName: 'Costa',
-    name: 'Ana',
-    number: '09',
-    phone: '19883921032002',
-    role: 'Rua Hilda Machado de Sene',
-    state: 'MG',
-    color: 'Parda',
-    gender: 'Masculino',
-    genderIdentity: 'Mulher cisgênera',
-    sexualOrientation: 'Heterossexual',
-    deficiency: 'Auditiva',
-  },
-  {
-    address: 'Adm',
-    cep: '38051510',
-    city: 'Uberaba',
-    details: 'Mais',
-    district: 'Residencial Nova Era',
-    email: 'ana@gmail.com',
-    id: 'qN3lEq4DKPnh3fXIvFUO',
-    lastName: 'Costa',
-    name: 'Ana',
-    number: '09',
-    phone: '19883921032002',
-    role: 'Rua Hilda Machado de Sene',
-    state: 'MG',
-    color: 'Branca',
-    gender: 'Masculino',
-    genderIdentity: 'Homem transexual/transgênero',
-    sexualOrientation: 'Heterossexual',
-    deficiency: 'Não',
-  },
-  {
-    address: 'Adm',
-    cep: '38051510',
-    city: 'Uberaba',
-    details: 'Mais',
-    district: 'Residencial Nova Era',
-    email: 'ana@gmail.com',
-    id: 'qN3lEq4DKPnh3fXIvFUO',
-    lastName: 'Costa',
-    name: 'Ana',
-    number: '09',
-    phone: '19883921032002',
-    role: 'Rua Hilda Machado de Sene',
-    state: 'MG',
-    color: 'Branca',
-    gender: 'Masculino',
-    genderIdentity: 'Homem transexual/transgênero',
-    sexualOrientation: 'Heterossexual',
-    deficiency: 'Outra',
-  },
-];
-
-const male = employees.filter((employee) => employee.gender === 'Masculino');
-const maleQuantity = male.length;
-const female = employees.filter((employee) => employee.gender === 'Feminino');
-const femaleQuantity = female.length;
-
-const white = employees.filter((employee) => employee.color === 'Branca');
-const whiteQuantity = white.length;
-
-const black = employees.filter((employee) => employee.color === 'Preta');
-const blackQuantity = black.length;
-
-const yellow = employees.filter((employee) => employee.color === 'Amarela');
-const yellowQuantity = yellow.length;
-
-const indian = employees.filter((employee) => employee.color === 'Indígena');
-const indianQuantity = indian.length;
-
-const brown = employees.filter((employee) => employee.color === 'Parda');
-const brownQuantity = brown.length;
-
-const otherColor = employees.filter((employee) => employee.color === 'Parda');
-const otherColorQuantity = otherColor.length;
-
-const noDeficiency = employees.filter(
-  (employee) => employee.deficiency === 'Não',
-);
-const noDeficiencyQuantity = noDeficiency.length;
-
-const visual = employees.filter((employee) => employee.deficiency === 'Visual');
-const visualQuantity = visual.length;
-
-const hearing = employees.filter(
-  (employee) => employee.deficiency === 'Auditiva',
-);
-const hearingQuantity = hearing.length;
-
-const physical = employees.filter(
-  (employee) => employee.deficiency === 'Física',
-);
-const physicalQuantity = physical.length;
-
-const intellectual = employees.filter(
-  (employee) => employee.deficiency === 'Intelectual',
-);
-const intellectualQuantity = intellectual.length;
-
-const otherDeficiency = employees.filter(
-  (employee) => employee.deficiency === 'Outra',
-);
-const otherDeficiencyQuantity = otherDeficiency.length;
-
 export default function Data() {
-  const [employees, setEmployees] = useState([]);
+  const [employeesList, setEmployeesList] = useState([]);
   useEffect(() => {
     listEmployee().then((list) => {
       const newEmployees = [];
       list.forEach((doc) => {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
-      setEmployees(newEmployees);
+      setEmployeesList(newEmployees);
+     
     });
   }, []);
+
+
+  const employees = [...employeesList]
+
+  const male = employees.filter((employee) => employee.gender === 'Masculino');
+  const maleQuantity = male.length;
+ 
+  const female = employees.filter((employee) => employee.gender === 'Feminino');
+  const femaleQuantity = female.length;
+  
+  const white = employees.filter((employee) => employee.color === 'Branca');
+  const whiteQuantity = white.length;
+
+  const black = employees.filter((employee) => employee.color === 'Preta');
+  const blackQuantity = black.length;
+
+  const yellow = employees.filter((employee) => employee.color === 'Amarela');
+  const yellowQuantity = yellow.length;
+
+  const indian = employees.filter((employee) => employee.color === 'Indígena');
+  const indianQuantity = indian.length;
+
+  const brown = employees.filter((employee) => employee.color === 'Parda');
+  const brownQuantity = brown.length;
+
+  const otherColor = employees.filter((employee) => employee.color === 'Outra');
+  const otherColorQuantity = otherColor.length;
+
+  const noDeficiency = employees.filter(
+    (employee) => employee.deficiency === 'Nenhuma',
+  );
+  const noDeficiencyQuantity = noDeficiency.length;
+
+  const visual = employees.filter(
+    (employee) => employee.deficiency === 'Visual',
+  );
+  const visualQuantity = visual.length;
+
+  const hearing = employees.filter(
+    (employee) => employee.deficiency === 'Auditiva',
+  );
+  const hearingQuantity = hearing.length;
+
+  const physical = employees.filter(
+    (employee) => employee.deficiency === 'Física',
+  );
+  const physicalQuantity = physical.length;
+
+  const intellectual = employees.filter(
+    (employee) => employee.deficiency === 'Intelectual',
+  );
+  const intellectualQuantity = intellectual.length;
+
+  const otherDeficiency = employees.filter(
+    (employee) => employee.deficiency === 'Outra',
+  );
+  const otherDeficiencyQuantity = otherDeficiency.length;
 
   return (
     <>
@@ -197,7 +81,7 @@ export default function Data() {
         <h2 className="title-data">Veja as estatísticas:</h2>
       </div>
       <div
-        style={{ display: 'flex', maxWidth: 1200 }}
+      
         className="container-charts">
         <div className="chartBox">
           <Pie

@@ -8,11 +8,47 @@ import '../../styles/register.css';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
+const colors = [
+  "Amarela",
+  "Branca",
+  "Indígena",
+  "Parda",
+  "Preta",
+  "Outra",
+]
+
+const deficiency = [
+  'Nenhuma',
+  'Visual',
+  'Auditiva',
+  'Visual',
+  'Física',
+  'Intelectual',
+  'Outra'
+];
+
+const gender = [
+  'Feminino',
+  'Masculino',
+  'Não informado'
+];
 
 export default function Register() {
   const [showModal, setShowModal] = useState(false);
   const [popUpText, setPopUpText] = useState('');
   const [valuesError, setValuesError] = useState({});
+  const [value, setValue] = React.useState(colors[0]);
+  const [inputValue, setInputValue] = React.useState('');
+
+  const [valueGender, setValueGender] = React.useState(gender[0]);
+  const [inputValueGender, setInputValueGender] = React.useState('');
+
+  const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
+  const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
+
   const [values, setValues] = useState({
     name: '',
     lastName: '',
@@ -24,6 +60,9 @@ export default function Register() {
     city: '',
     state: '',
     role: '',
+    color: value,
+    gender: valueGender,
+    deficiency: valueDeficiency,
   });
 
   const handleChange = (e) => {
@@ -44,6 +83,7 @@ export default function Register() {
       ...valuesError,
       [inputName]: isInvalid,
     });
+
   };
 
   const navigate = useNavigate();
@@ -57,8 +97,8 @@ export default function Register() {
   };
 
   const handleBlurCep = (e) => {
-    const value = Number(e.target.value);
-    if (value >= 10000000 && value < 99999999) {
+    const value = e.target.value;
+    if (value.length === 8) {
       dataCEP(value);
     } else {
       alert('O cep é inválido: ' + e.target.value);
@@ -69,10 +109,7 @@ export default function Register() {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((json) => json.json())
       .then((response) => {
-        console.log(response);
-
         if (!response.erro) {
-          console.log(response.localidade);
           setValues({
             ...values,
             address: response.logradouro,
@@ -222,6 +259,65 @@ export default function Register() {
             valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
+       <Autocomplete
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            
+            setValues({
+              ...values,
+              color: newInputValue,
+            });
+            setInputValue(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={colors}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Cor" />}
+        /> 
+        <Autocomplete
+          value={valueGender}
+          onChange={(event, newValue) => {
+            setValueGender(newValue);
+          }}
+          inputValue={inputValueGender}
+         
+          onInputChange={(event, newInputValue) => {
+            
+            setValues({
+              ...values,
+              gender: newInputValue,
+            });
+            setInputValueGender(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={gender}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Gênero" />}
+        />
+        <Autocomplete
+          value={valueDeficiency}
+          onChange={(event, newValue) => {
+            setValueDeficiency(newValue);
+          }}
+          inputValue={inputValueDeficiency}
+         
+          onInputChange={(event, newInputValue) => {
+            
+            setValues({
+              ...values,
+              deficiency: newInputValue,
+            });
+            setInputValueDeficiency(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={deficiency}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Deficiência" />}
+        />
       </div>
       <Stack
         direction="row"
@@ -230,7 +326,7 @@ export default function Register() {
         alignItems="flex-end">
         <Button
           onClick={() => {
-            register();
+            register()
             setShowModal(true);
             setPopUpText('Cadastro realizado com sucesso!');
           }}

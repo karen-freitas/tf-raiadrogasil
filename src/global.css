@@ -149,10 +149,14 @@ main {
 {
   .chartBox
    {
-    width:350px
+    width:350px;
+    margin-right:1rem;
+    margin-left:1rem;
    }
    .container-charts{
      margin-top:5rem;
+     display: 'flex';
+     max-width: 1300px; 
      
    }
 }

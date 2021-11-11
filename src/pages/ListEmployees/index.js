@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { listEmployee, deleteEmployee } from '../../services/firebase';
 import TesteProfile from '../../components/TesteProfile';
 import Header from '../../components/Header/Header.js';
-
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -116,7 +115,6 @@ export default function ListEmployees() {
     if (event.target.getAttribute('value') === 'Mais') {
       const id = event.target.getAttribute('data-item');
       const employee = employees.find((employee) => employee.id === id);
-      console.log(employee);
       setActiveProfile(true);
       setEmployeeSelected(employee);
     }
@@ -141,7 +139,6 @@ export default function ListEmployees() {
 
   const onChange = (e) => {
     setSearch(e.target.value);
-    console.log(search);
   };
 
   const clickSearch = () => {
@@ -182,24 +179,24 @@ export default function ListEmployees() {
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
         />
       ) : (
-        <Paper sx={{ width: '95%'}}>
+        <Paper sx={{ width: '95%' }}>
           <div className="container-search">
             <div className="no-employee-container">
               <p className="no-employee">{searchText}</p>
             </div>
             <div className="input-btn-wrapper">
-            <input
-              className={classInput}
-              type="text"
-              placeholder="Pesquisar"
-              value={search}
-              name="search"
-              onChange={onChange}></input>
-            <span class="input-group-btn">
-              <button
-                className={`btn-search ${classButton}`}
-                onClick={clickSearch}></button>
-            </span>
+              <input
+                className={classInput}
+                type="text"
+                placeholder="Pesquisar"
+                value={search}
+                name="search"
+                onChange={onChange}></input>
+              <span className="input-group-btn">
+                <button
+                  className={`btn-search ${classButton}`}
+                  onClick={clickSearch}></button>
+              </span>
             </div>
           </div>
 
@@ -261,7 +258,7 @@ export default function ListEmployees() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        )}
+      )}
     </>
   );
 }
