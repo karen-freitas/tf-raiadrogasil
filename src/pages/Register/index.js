@@ -276,7 +276,7 @@ export default function Register() {
             valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 1, width: '20rem' }}>
           <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -294,7 +294,7 @@ export default function Register() {
             <MenuItem value="Outra">Outra</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 1, width: '20rem' }}>
           <InputLabel id="demo-simple-select-helper-label">Deficiência</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -313,7 +313,7 @@ export default function Register() {
             <MenuItem value="Outra">Outra</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 1, width: '20rem' }}>
           <InputLabel id="demo-simple-select-helper-label">Gênero</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
