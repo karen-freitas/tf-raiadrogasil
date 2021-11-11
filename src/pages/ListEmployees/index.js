@@ -18,16 +18,6 @@ export default function ListEmployees() {
   const [activeProfile, setActiveProfile] = useState(false);
   const [employeeSelected, setEmployeeSelected] = useState({});
 
-  // const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  //   [`&.${tableCellClasses.head}`]: {
-  //     backgroundColor: theme.palette.common.black,
-  //     color: theme.palette.common.white,
-  //   },
-  //   [`&.${tableCellClasses.body}`]: {
-  //     fontSize: 14,
-  //   },
-  // }));
-
   const useStyles = makeStyles({
     root: {
       'background-color': '#d5d9de',

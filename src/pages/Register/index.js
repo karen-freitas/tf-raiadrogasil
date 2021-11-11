@@ -11,17 +11,44 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
+const colors = [
+  "Amarela",
+  "Branca",
+  "Indígena",
+  "Parda",
+  "Preta",
+  "Outra",
+]
+
+const deficiency = [
+  'Nenhuma',
+  'Visual',
+  'Auditiva',
+  'Visual',
+  'Física',
+  'Intelectual',
+  'Outra'
+];
 
 const gender = [
-{title: 'Feminino'},
-
-];  
-
+  'Feminino',
+  'Masculino',
+  'Não informado'
+];
 
 export default function Register() {
   const [showModal, setShowModal] = useState(false);
   const [popUpText, setPopUpText] = useState('');
   const [valuesError, setValuesError] = useState({});
+  const [value, setValue] = React.useState(colors[0]);
+  const [inputValue, setInputValue] = React.useState('');
+
+  const [valueGender, setValueGender] = React.useState(gender[0]);
+  const [inputValueGender, setInputValueGender] = React.useState('');
+
+  const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
+  const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
+
   const [values, setValues] = useState({
     name: '',
     lastName: '',
@@ -33,8 +60,10 @@ export default function Register() {
     city: '',
     state: '',
     role: '',
-    gender:'',
-    });
+    color: value,
+    gender: valueGender,
+    deficiency: valueDeficiency,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +71,7 @@ export default function Register() {
       ...values,
       [name]: value,
     });
+    console.log(values);
     inputValidation(name, value);
   };
 
@@ -54,6 +84,7 @@ export default function Register() {
       ...valuesError,
       [inputName]: isInvalid,
     });
+
   };
 
   const navigate = useNavigate();
@@ -93,22 +124,7 @@ export default function Register() {
         }
       });
   };
-  
 
-
-  const options = [ {    
-
-    label: 'Mulher cisgênera'
-      },
-    {
-
-      value: 'mulher'
-    },
-
-
-   
-  
-  ]
 
   return (
     <>
@@ -247,21 +263,54 @@ export default function Register() {
           }
         />
 
-        <select
-          id="gender"
-          onChange={handleChange}
-          className="select"
-          value={values.options}
-          name="gender"
-        >
-          {options.map(({ value, id, hidden }) => (
-            <option key={id} value={value} hidden={hidden}>
-              {value}
-            </option>
-          ))}
-        </select>
-                       
-      </div>
+      
+            
+</div>
+
+       
+        <Autocomplete
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={colors}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Cor" />}
+        />
+        <Autocomplete
+          value={valueGender}
+          onChange={(event, newValue) => {
+            setValueGender(newValue);
+          }}
+          inputValue={inputValueGender}
+          onInputChange={(event, newInputValue) => {
+            setInputValueGender(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={gender}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Gênero" />}
+        />
+        <Autocomplete
+          value={valueDeficiency}
+          onChange={(event, newValue) => {
+            setValueDeficiency(newValue);
+          }}
+          inputValue={inputValueDeficiency}
+          onInputChange={(event, newInputValue) => {
+            setInputValueDeficiency(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={deficiency}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Deficiência" />}
+        />
+     
       <Stack
         direction="row"
         spacing={2}
@@ -269,7 +318,7 @@ export default function Register() {
         alignItems="flex-end">
         <Button
           onClick={() => {
-            register();
+            register()
             setShowModal(true);
             setPopUpText('Cadastro realizado com sucesso!');
           }}
