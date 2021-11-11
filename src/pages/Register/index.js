@@ -3,51 +3,29 @@ import FormPropsTextFields from '../../components/input/input';
 import { useState } from 'react';
 import { BasicModal } from '../../components/modals/modals';
 import Header from '../../components/Header/Header.js';
+import Loader from '../../components/Loader/index.js';
 import { registerEmployee } from '../../services/firebase';
 import '../../styles/register.css';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Loader from '../../components/Loader/index.js';
-
-const colors = ['Amarela', 'Branca', 'Indígena', 'Parda', 'Preta', 'Outra'];
-
-const deficiency = [
-  'Nenhuma',
-  'Visual',
-  'Auditiva',
-  'Visual',
-  'Física',
-  'Intelectual',
-  'Outra',
-];
-
-const gender = ['Feminino', 'Masculino', 'Não informado'];
-
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 export default function Register() {
   const [valuesError, setValuesError] = useState({});
-  const [value, setValue] = React.useState(colors[0]);
-  const [inputValue, setInputValue] = React.useState('');
 
   const [popUpText, setPopUpText] = useState('');
   const [showModalInvalidForm, setShowModalInvalidForm] = useState(false);
   const [showModalValidForm, setShowModalValidForm] = useState(false);
-
-  const [valueGender, setValueGender] = React.useState(gender[0]);
-  const [inputValueGender, setInputValueGender] = React.useState('');
-
-  const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
-  const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
-
   const [loading, setLoading] = useState(false);
 
   const [values, setValues] = useState({
     name: '',
     lastName: '',
-    phone: '',
     email: '',
+    phone: '',
     cep: '',
     address: '',
     number: '',
@@ -55,9 +33,9 @@ export default function Register() {
     city: '',
     state: '',
     role: '',
-    color: value,
-    gender: valueGender,
-    deficiency: valueDeficiency,
+    color: '',
+    gender: '',
+    deficiency: '',
   });
 
   const handleChange = (e) => {
@@ -66,7 +44,6 @@ export default function Register() {
       ...values,
       [name]: value,
     });
-
     inputValidation(name, value);
   };
 
@@ -299,62 +276,58 @@ export default function Register() {
             valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
-        <Autocomplete
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setValues({
-              ...values,
-              color: newInputValue,
-            });
-            setInputValue(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={colors}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Cor" />}
-        />
-        <Autocomplete
-          value={valueGender}
-          onChange={(event, newValue) => {
-            setValueGender(newValue);
-          }}
-          inputValue={inputValueGender}
-          onInputChange={(event, newInputValue) => {
-            setValues({
-              ...values,
-              gender: newInputValue,
-            });
-            setInputValueGender(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={gender}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Gênero" />}
-        />
-        <Autocomplete
-          value={valueDeficiency}
-          onChange={(event, newValue) => {
-            setValueDeficiency(newValue);
-          }}
-          inputValue={inputValueDeficiency}
-          onInputChange={(event, newInputValue) => {
-            setValues({
-              ...values,
-              deficiency: newInputValue,
-            });
-            setInputValueDeficiency(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={deficiency}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Deficiência" />
-          )}
-        />
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="color"
+            value={values.color}
+            label="Color"
+            onChange={handleChange}
+          >
+            <MenuItem value="Amarela">Amarela</MenuItem>
+            <MenuItem value="Branca">Branca</MenuItem>
+            <MenuItem value="Indígena">Indígena</MenuItem>
+            <MenuItem value="Preta">Preta</MenuItem>
+            <MenuItem value="Parda">Parda</MenuItem>
+            <MenuItem value="Outra">Outra</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Deficiência</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="deficiency"
+            value={values.deficiency}
+            label="Deficiência"
+            onChange={handleChange}
+          >
+            <MenuItem value="Nenhuma">Nenhuma</MenuItem>
+            <MenuItem value="Visual">Visual</MenuItem>
+            <MenuItem value="Auditiva">Auditiva</MenuItem>
+            <MenuItem value="Visual">Visual</MenuItem>
+            <MenuItem value="Física">Física</MenuItem>
+            <MenuItem value="Intelectual">Intelectual</MenuItem>
+            <MenuItem value="Outra">Outra</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Gênero</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="gender"
+            value={values.gender}
+            label="Gênero"
+            onChange={handleChange}
+          >
+            <MenuItem value="Feminino">Feminino</MenuItem>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Não informado">Não informado</MenuItem>
+          </Select>
+        </FormControl>
       </div>
       <Stack
         direction="row"

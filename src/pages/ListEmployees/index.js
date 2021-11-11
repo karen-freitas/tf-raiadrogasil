@@ -83,7 +83,7 @@ export default function ListEmployees() {
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
-   
+
     {
       field: 'details',
       headerName: 'Ações',
