@@ -1,13 +1,12 @@
 .form-area {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   width: 90%;
   height: 60vh;
   margin-top: 1rem;
   margin-left: 5rem;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {

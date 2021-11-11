@@ -69,7 +69,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     gender: data.gender,
     deficiency: data.deficiency,
   });
-  console.log(values, inputValueGender);
+ 
   const handleBlurCep = (e) => {
     const value = e.target.value;
     if (value.length === 8) {
@@ -283,7 +283,7 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
         direction="row"
         spacing={2}
         display="flex"
-        marginTop="10rem"
+        marginTop="2rem"
         width="100%"
         justifyContent="end"
         alignItems="center">

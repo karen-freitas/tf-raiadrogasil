@@ -1,7 +1,7 @@
 .container-list {
     background: var(--light-grey);
     width: 92%;
-    height: 90vh;
+    min-height: 90vh;
     /*height:auto;*/
     padding: 1.5rem;
     margin: 2rem;

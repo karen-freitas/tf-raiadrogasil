@@ -118,3 +118,48 @@ main {
   margin-left:2rem;
 }
 
+.title-data{
+  font-size:1.5rem;
+  margin-bottom:3rem;
+  color:var(--dark-green);
+
+
+}
+
+.container-charts{
+  width:100%;
+  min-height: 35vh;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: space-around;
+}
+
+.container-title{
+ width:100%;
+}
+
+.chartBox{
+  width:300px;
+
+}
+
+@media (min-width: 1400px)
+{
+  .chartBox
+   {
+    width:350px;
+    margin-right:1rem;
+    margin-left:1rem;
+   }
+   .container-charts{
+     margin-top:5rem;
+     display: 'flex';
+     max-width: 1300px; 
+     
+   }
+}
+
+
+

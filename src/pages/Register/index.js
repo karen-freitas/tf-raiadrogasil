@@ -293,27 +293,38 @@ export default function Register() {
             valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
-        <Autocomplete
+       <Autocomplete
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
           inputValue={inputValue}
           onInputChange={(event, newInputValue) => {
+            
+            setValues({
+              ...values,
+              color: newInputValue,
+            });
             setInputValue(newInputValue);
           }}
           id="controllable-states-demo"
           options={colors}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Cor" />}
-        />
+        /> 
         <Autocomplete
           value={valueGender}
           onChange={(event, newValue) => {
             setValueGender(newValue);
           }}
           inputValue={inputValueGender}
+         
           onInputChange={(event, newInputValue) => {
+            
+            setValues({
+              ...values,
+              gender: newInputValue,
+            });
             setInputValueGender(newInputValue);
           }}
           id="controllable-states-demo"
@@ -327,7 +338,12 @@ export default function Register() {
             setValueDeficiency(newValue);
           }}
           inputValue={inputValueDeficiency}
+         
           onInputChange={(event, newInputValue) => {
+            setValues({
+              ...values,
+              deficiency: newInputValue,
+            });
             setInputValueDeficiency(newInputValue);
           }}
           id="controllable-states-demo"
@@ -345,13 +361,14 @@ export default function Register() {
         justifyContent="center"
         align-items="center"
         width="100%"
-        height="10vh"
+        height="5vh"
         >
         <Button
           onClick={() => {
             register()
             setShowModal(true);
             /*setPopUpText('Cadastro realizado com sucesso!');*/
+            register();
           }}
           variant="contained"
           color="success">
