@@ -340,6 +340,7 @@ export default function Register() {
           inputValue={inputValueDeficiency}
          
           onInputChange={(event, newInputValue) => {
+            
             setValues({
               ...values,
               deficiency: newInputValue,
@@ -361,7 +362,6 @@ export default function Register() {
         justifyContent="center"
         align-items="center"
         width="100%"
-        height="5vh"
         >
         <Button
           onClick={() => {

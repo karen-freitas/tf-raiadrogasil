@@ -12,22 +12,15 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@material-ui/styles';
+import Loader from '../../components/Loader/index.js';
 
 export default function ListEmployees() {
   const [employees, setEmployees] = useState([]);
   const [activeProfile, setActiveProfile] = useState(false);
   const [employeeSelected, setEmployeeSelected] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  //   [`&.${tableCellClasses.head}`]: {
-  //     backgroundColor: theme.palette.common.black,
-  //     color: theme.palette.common.white,
-  //   },
-  //   [`&.${tableCellClasses.body}`]: {
-  //     fontSize: 14,
-  //   },
-  // }));
-
+ 
   const useStyles = makeStyles({
     root: {
       'background-color': '#d5d9de',
@@ -60,6 +53,7 @@ export default function ListEmployees() {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployees(newEmployees);
+      setTimeout(setLoading(false), 1000);
    
     });
   }, []);
@@ -93,7 +87,7 @@ export default function ListEmployees() {
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
-   
+
     {
       field: 'details',
       headerName: 'Ações',
@@ -104,7 +98,7 @@ export default function ListEmployees() {
   ];
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -174,6 +168,7 @@ export default function ListEmployees() {
 
   return (
     <>
+      {loading ? <Loader /> : false}
       <Header name="Colaboradores" />
 
       {activeProfile ? (
@@ -204,7 +199,7 @@ export default function ListEmployees() {
             </div>
           </div>
 
-          <TableContainer sx={{ maxHeight: 600 }}>
+          <TableContainer sx={{ maxHeight: 500 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead
                   className={classes.header}>
@@ -254,7 +249,7 @@ export default function ListEmployees() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={[6, 25, 100]}
             component="div"
             count={employees.length}
             rowsPerPage={rowsPerPage}
