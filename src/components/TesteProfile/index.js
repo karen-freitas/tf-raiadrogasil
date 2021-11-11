@@ -8,14 +8,51 @@ import { ReactComponent as ReturnButton } from '../../images/return.svg';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { updateEmployeeProfile } from '../../services/firebase';
-import '../../styles/testeProfile.css';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import '../../styles/testeProfile.css'
 import icon from '../../images/avatar.png';
+
+const colors = [
+  "Amarela",
+  "Branca",
+  "Indígena",
+  "Parda",
+  "Preta",
+  "Outra",
+]
+
+const deficiency = [
+  'Nenhuma',
+  'Visual',
+  'Auditiva',
+  'Visual',
+  'Física',
+  'Intelectual',
+  'Outra'
+];
+
+const gender = [
+  'Feminino',
+  'Masculino',
+  'Não informado'
+];
 
 const TesteProfile = ({ data, onClick, deleteEmployee }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [popUpText, setPopUpText] = useState('');
   const [disableInput, setDisableInput] = useState(true);
+
+  const [value, setValue] = React.useState(colors[0]);
+  const [inputValue, setInputValue] = React.useState('');
+
+  const [valueGender, setValueGender] = React.useState(gender[0]);
+  const [inputValueGender, setInputValueGender] = React.useState('');
+
+  const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
+  const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
+
   const [values, setValues] = useState({
     name: data.name,
     lastName: data.lastName,
@@ -28,8 +65,11 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
     district: data.district,
     city: data.city,
     state: data.state,
+    color: data.color,
+    gender: data.gender,
+    deficiency: data.deficiency,
   });
-
+ 
   const handleBlurCep = (e) => {
     const value = e.target.value;
     if (value.length === 8) {
@@ -196,6 +236,48 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
           type="text"
           disabled={disableInput}
         />
+        <Autocomplete
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={colors}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Cor" />}
+        />
+        <Autocomplete
+          value={valueGender}
+          onChange={(event, newValue) => {
+            setValueGender(newValue);
+          }}
+          inputValue={inputValueGender}
+          onInputChange={(event, newInputValue) => {
+            setInputValueGender(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={gender}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Gênero" />}
+        />
+        <Autocomplete
+          value={valueDeficiency}
+          onChange={(event, newValue) => {
+            setValueDeficiency(newValue);
+          }}
+          inputValue={inputValueDeficiency}
+          onInputChange={(event, newInputValue) => {
+            setInputValueDeficiency(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={deficiency}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Deficiência" />}
+        />
       </div>
       <Stack
         direction="row"
@@ -228,6 +310,9 @@ const TesteProfile = ({ data, onClick, deleteEmployee }) => {
                 values.district,
                 values.city,
                 values.state,
+                value,
+                valueGender,
+                valueDeficiency,
               );
               setShowModal(true);
               setPopUpText('Perfil do funcionário atualizado com sucesso!');
