@@ -20,7 +20,6 @@ export default function Register() {
     lastName: '',
     email: '',
     phone: '',
-    email: '',
     cep: '',
     address: '',
     number: '',
