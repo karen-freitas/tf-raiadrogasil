@@ -3,9 +3,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: auto;
-  align-items: flex-end;
-  align-content: space-around;
-  justify-content: space-evenly;
+  margin-top: 1rem;
+  margin-left: 5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {

@@ -12,18 +12,25 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@material-ui/styles';
+import Loader from '../../components/Loader/index.js';
 
 export default function ListEmployees() {
   const [employees, setEmployees] = useState([]);
   const [activeProfile, setActiveProfile] = useState(false);
   const [employeeSelected, setEmployeeSelected] = useState({});
+  const [loading, setLoading] = useState(true);
 
+ 
   const useStyles = makeStyles({
     root: {
       'background-color': '#d5d9de',
       color: '#404040',
     },
+    header: {
+      'border-radius': '0.5rem',
+    },
     row: {
+      'background-color': '#f2f2f2',
       color: '#404040',
     },
     container: {
@@ -46,6 +53,7 @@ export default function ListEmployees() {
         newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
       setEmployees(newEmployees);
+      setTimeout(setLoading(false), 1000);
    
     });
   }, []);
@@ -79,7 +87,7 @@ export default function ListEmployees() {
       align: 'left',
       format: (value) => value.toLocaleString('en-US'),
     },
-   
+
     {
       field: 'details',
       headerName: 'Ações',
@@ -160,6 +168,7 @@ export default function ListEmployees() {
 
   return (
     <>
+      {loading ? <Loader /> : false}
       <Header name="Colaboradores" />
 
       {activeProfile ? (
@@ -169,7 +178,7 @@ export default function ListEmployees() {
           deleteEmployee={() => handleDeleteEmployee(employeeSelected)}
         />
       ) : (
-        <Paper sx={{ width: '95%' }}>
+        <Paper sx={{ width: '95%', boxShadow: 0 }}>
           <div className="container-search">
             <div className="no-employee-container">
               <p className="no-employee">{searchText}</p>
@@ -246,6 +255,7 @@ export default function ListEmployees() {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            className={classes.row}
           />
         </Paper>
       )}
