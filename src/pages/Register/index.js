@@ -8,50 +8,20 @@ import '../../styles/register.css';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-
-const colors = [
-  "Amarela",
-  "Branca",
-  "Indígena",
-  "Parda",
-  "Preta",
-  "Outra",
-]
-
-const deficiency = [
-  'Nenhuma',
-  'Visual',
-  'Auditiva',
-  'Visual',
-  'Física',
-  'Intelectual',
-  'Outra'
-];
-
-const gender = [
-  'Feminino',
-  'Masculino',
-  'Não informado'
-];
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 export default function Register() {
   const [showModal, setShowModal] = useState(false);
   const [popUpText, setPopUpText] = useState('');
   const [valuesError, setValuesError] = useState({});
-  const [value, setValue] = React.useState(colors[0]);
-  const [inputValue, setInputValue] = React.useState('');
-
-  const [valueGender, setValueGender] = React.useState(gender[0]);
-  const [inputValueGender, setInputValueGender] = React.useState('');
-
-  const [valueDeficiency, setValueDeficiency] = React.useState(deficiency[0]);
-  const [inputValueDeficiency, setInputValueDeficiency] = React.useState('');
 
   const [values, setValues] = useState({
     name: '',
     lastName: '',
+    email: '',
     phone: '',
     cep: '',
     address: '',
@@ -60,19 +30,18 @@ export default function Register() {
     city: '',
     state: '',
     role: '',
-    color: value,
-    gender: valueGender,
-    deficiency: valueDeficiency,
+    color: '',
+    gender: '',
+    deficiency: '',
   });
-
+  console.log('values', values);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
       ...values,
       [name]: value,
     });
-    console.log(values);
-    inputValidation(name, value);
+    inputValidation(name);
   };
 
   const inputValidation = (inputName, inputValue) => {
@@ -86,6 +55,10 @@ export default function Register() {
     });
 
   };
+
+  // const handleChangeSelect = (event) => {
+  //   setValues(event.target.value);
+  // };
 
   const navigate = useNavigate();
   const routerHome = () => navigate('/');
@@ -260,48 +233,58 @@ export default function Register() {
             valuesError.state && 'Por favor, preencha com o seu estado'
           }
         />
-        <Autocomplete
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={colors}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Cor" />}
-        />
-        <Autocomplete
-          value={valueGender}
-          onChange={(event, newValue) => {
-            setValueGender(newValue);
-          }}
-          inputValue={inputValueGender}
-          onInputChange={(event, newInputValue) => {
-            setInputValueGender(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={gender}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Gênero" />}
-        />
-        <Autocomplete
-          value={valueDeficiency}
-          onChange={(event, newValue) => {
-            setValueDeficiency(newValue);
-          }}
-          inputValue={inputValueDeficiency}
-          onInputChange={(event, newInputValue) => {
-            setInputValueDeficiency(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={deficiency}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Deficiência" />}
-        />
+
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Cor</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="color"
+            value={values.color}
+            label="Color"
+            onChange={handleChange}
+          >
+            <MenuItem value="Amarela">Amarela</MenuItem>
+            <MenuItem value="Branca">Branca</MenuItem>
+            <MenuItem value="Indígena">Indígena</MenuItem>
+            <MenuItem value="Parda">Parda</MenuItem>
+            <MenuItem value="Outra">Outra</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Deficiência</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="deficiency"
+            value={values.deficiency}
+            label="Deficiência"
+            onChange={handleChange}
+          >
+            <MenuItem value="Nenhuma">Nenhuma</MenuItem>
+            <MenuItem value="Visual">Visual</MenuItem>
+            <MenuItem value="Auditiva">Auditiva</MenuItem>
+            <MenuItem value="Visual">Visual</MenuItem>
+            <MenuItem value="Física">Física</MenuItem>
+            <MenuItem value="Intelectual">Intelectual</MenuItem>
+            <MenuItem value="Outra">Outra</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-helper-label">Gênero</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            name="gender"
+            value={values.gender}
+            label="Gênero"
+            onChange={handleChange}
+          >
+            <MenuItem value="Feminino">Feminino</MenuItem>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Não informado">Não informado</MenuItem>
+          </Select>
+        </FormControl>
       </div>
       <Stack
         direction="row"
