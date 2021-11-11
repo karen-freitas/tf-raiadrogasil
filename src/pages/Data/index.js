@@ -1,198 +1,205 @@
-import React, {useEffect, useState} from 'react'
-import { listEmployee} from '../../services/firebase';
+import React, { useEffect, useState } from 'react';
+import { listEmployee } from '../../services/firebase';
+import Header from '../../components/Header/Header.js';
 
-import { Pie, Doughnut, Bar, defaults } from "react-chartjs-2";
+import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
 
 const employees = [
   {
-    address: "Adm",
-    cep: "38051510",
-    city: "Uberaba",
-    details: "Mais",
-    district: "Residencial Nova Era",
-    email: "ana@gmail.com",
-    id: "qN3lEq4DKPnh3fXIvFUO",
-    lastName: "Costa",
-    name: "Ana",
-    number: "09",
-    phone: "19883921032002",
-    role: "Rua Hilda Machado de Sene",
-    state: "MG",
-    color: "Branca",
-    gender: "Feminino",
-    genderIdentity: "Mulher cisgênera",
-    sexualOrientation: "Heterossexual",
-    deficiency: "Física",
+    address: 'Adm',
+    cep: '38051510',
+    city: 'Uberaba',
+    details: 'Mais',
+    district: 'Residencial Nova Era',
+    email: 'ana@gmail.com',
+    id: 'qN3lEq4DKPnh3fXIvFUO',
+    lastName: 'Costa',
+    name: 'Ana',
+    number: '09',
+    phone: '19883921032002',
+    role: 'Rua Hilda Machado de Sene',
+    state: 'MG',
+    color: 'Branca',
+    gender: 'Feminino',
+    genderIdentity: 'Mulher cisgênera',
+    sexualOrientation: 'Heterossexual',
+    deficiency: 'Física',
   },
   {
-    address: "Adm",
-    cep: "38051510",
-    city: "Uberaba",
-    details: "Mais",
-    district: "Residencial Nova Era",
-    email: "ana@gmail.com",
-    id: "qN3lEq4DKPnh3fXIvFUO",
-    lastName: "Costa",
-    name: "Ana",
-    number: "09",
-    phone: "19883921032002",
-    role: "Rua Hilda Machado de Sene",
-    state: "MG",
-    color: "Preta",
-    gender: "Feminino",
-    genderIdentity: "Mulher cisgênera",
-    sexualOrientation: "Heterossexual",
-    deficiency: "Não",
+    address: 'Adm',
+    cep: '38051510',
+    city: 'Uberaba',
+    details: 'Mais',
+    district: 'Residencial Nova Era',
+    email: 'ana@gmail.com',
+    id: 'qN3lEq4DKPnh3fXIvFUO',
+    lastName: 'Costa',
+    name: 'Ana',
+    number: '09',
+    phone: '19883921032002',
+    role: 'Rua Hilda Machado de Sene',
+    state: 'MG',
+    color: 'Preta',
+    gender: 'Feminino',
+    genderIdentity: 'Mulher cisgênera',
+    sexualOrientation: 'Heterossexual',
+    deficiency: 'Não',
   },
   {
-    address: "Adm",
-    cep: "38051510",
-    city: "Uberaba",
-    details: "Mais",
-    district: "Residencial Nova Era",
-    email: "ana@gmail.com",
-    id: "qN3lEq4DKPnh3fXIvFUO",
-    lastName: "Costa",
-    name: "Ana",
-    number: "09",
-    phone: "19883921032002",
-    role: "Rua Hilda Machado de Sene",
-    state: "MG",
-    color: "Branca",
-    gender: "Masculino",
-    genderIdentity: "Mulher cisgênera",
-    sexualOrientation: "Heterossexual",
-    deficiency: "Visual",
+    address: 'Adm',
+    cep: '38051510',
+    city: 'Uberaba',
+    details: 'Mais',
+    district: 'Residencial Nova Era',
+    email: 'ana@gmail.com',
+    id: 'qN3lEq4DKPnh3fXIvFUO',
+    lastName: 'Costa',
+    name: 'Ana',
+    number: '09',
+    phone: '19883921032002',
+    role: 'Rua Hilda Machado de Sene',
+    state: 'MG',
+    color: 'Branca',
+    gender: 'Masculino',
+    genderIdentity: 'Mulher cisgênera',
+    sexualOrientation: 'Heterossexual',
+    deficiency: 'Visual',
   },
   {
-    address: "Adm",
-    cep: "38051510",
-    city: "Uberaba",
-    details: "Mais",
-    district: "Residencial Nova Era",
-    email: "ana@gmail.com",
-    id: "qN3lEq4DKPnh3fXIvFUO",
-    lastName: "Costa",
-    name: "Ana",
-    number: "09",
-    phone: "19883921032002",
-    role: "Rua Hilda Machado de Sene",
-    state: "MG",
-    color: "Parda",
-    gender: "Masculino",
-    genderIdentity: "Mulher cisgênera",
-    sexualOrientation: "Heterossexual",
-    deficiency: "Auditiva",
+    address: 'Adm',
+    cep: '38051510',
+    city: 'Uberaba',
+    details: 'Mais',
+    district: 'Residencial Nova Era',
+    email: 'ana@gmail.com',
+    id: 'qN3lEq4DKPnh3fXIvFUO',
+    lastName: 'Costa',
+    name: 'Ana',
+    number: '09',
+    phone: '19883921032002',
+    role: 'Rua Hilda Machado de Sene',
+    state: 'MG',
+    color: 'Parda',
+    gender: 'Masculino',
+    genderIdentity: 'Mulher cisgênera',
+    sexualOrientation: 'Heterossexual',
+    deficiency: 'Auditiva',
   },
   {
-    address: "Adm",
-    cep: "38051510",
-    city: "Uberaba",
-    details: "Mais",
-    district: "Residencial Nova Era",
-    email: "ana@gmail.com",
-    id: "qN3lEq4DKPnh3fXIvFUO",
-    lastName: "Costa",
-    name: "Ana",
-    number: "09",
-    phone: "19883921032002",
-    role: "Rua Hilda Machado de Sene",
-    state: "MG",
-    color: "Branca",
-    gender: "Masculino",
-    genderIdentity: "Homem transexual/transgênero",
-    sexualOrientation: "Heterossexual",
-    deficiency: "Não",
+    address: 'Adm',
+    cep: '38051510',
+    city: 'Uberaba',
+    details: 'Mais',
+    district: 'Residencial Nova Era',
+    email: 'ana@gmail.com',
+    id: 'qN3lEq4DKPnh3fXIvFUO',
+    lastName: 'Costa',
+    name: 'Ana',
+    number: '09',
+    phone: '19883921032002',
+    role: 'Rua Hilda Machado de Sene',
+    state: 'MG',
+    color: 'Branca',
+    gender: 'Masculino',
+    genderIdentity: 'Homem transexual/transgênero',
+    sexualOrientation: 'Heterossexual',
+    deficiency: 'Não',
   },
   {
-    address: "Adm",
-    cep: "38051510",
-    city: "Uberaba",
-    details: "Mais",
-    district: "Residencial Nova Era",
-    email: "ana@gmail.com",
-    id: "qN3lEq4DKPnh3fXIvFUO",
-    lastName: "Costa",
-    name: "Ana",
-    number: "09",
-    phone: "19883921032002",
-    role: "Rua Hilda Machado de Sene",
-    state: "MG",
-    color: "Branca",
-    gender: "Masculino",
-    genderIdentity: "Homem transexual/transgênero",
-    sexualOrientation: "Heterossexual",
-    deficiency: "Outra",
+    address: 'Adm',
+    cep: '38051510',
+    city: 'Uberaba',
+    details: 'Mais',
+    district: 'Residencial Nova Era',
+    email: 'ana@gmail.com',
+    id: 'qN3lEq4DKPnh3fXIvFUO',
+    lastName: 'Costa',
+    name: 'Ana',
+    number: '09',
+    phone: '19883921032002',
+    role: 'Rua Hilda Machado de Sene',
+    state: 'MG',
+    color: 'Branca',
+    gender: 'Masculino',
+    genderIdentity: 'Homem transexual/transgênero',
+    sexualOrientation: 'Heterossexual',
+    deficiency: 'Outra',
   },
 ];
 
-const male = employees.filter((employee) => employee.gender === "Masculino");
+const male = employees.filter((employee) => employee.gender === 'Masculino');
 const maleQuantity = male.length;
-const female = employees.filter((employee) => employee.gender === "Feminino");
+const female = employees.filter((employee) => employee.gender === 'Feminino');
 const femaleQuantity = female.length;
 
-const white = employees.filter((employee) => employee.color === "Branca");
+const white = employees.filter((employee) => employee.color === 'Branca');
 const whiteQuantity = white.length;
 
-const black = employees.filter((employee) => employee.color === "Preta");
+const black = employees.filter((employee) => employee.color === 'Preta');
 const blackQuantity = black.length;
 
-const yellow = employees.filter((employee) => employee.color === "Amarela");
+const yellow = employees.filter((employee) => employee.color === 'Amarela');
 const yellowQuantity = yellow.length;
 
-const indian = employees.filter((employee) => employee.color === "Indígena");
+const indian = employees.filter((employee) => employee.color === 'Indígena');
 const indianQuantity = indian.length;
 
-const brown = employees.filter((employee) => employee.color === "Parda");
+const brown = employees.filter((employee) => employee.color === 'Parda');
 const brownQuantity = brown.length;
 
-const otherColor = employees.filter((employee) => employee.color === "Parda");
+const otherColor = employees.filter((employee) => employee.color === 'Parda');
 const otherColorQuantity = otherColor.length;
 
 const noDeficiency = employees.filter(
-  (employee) => employee.deficiency === "Não"
+  (employee) => employee.deficiency === 'Não',
 );
 const noDeficiencyQuantity = noDeficiency.length;
 
-const visual = employees.filter((employee) => employee.deficiency === "Visual");
+const visual = employees.filter((employee) => employee.deficiency === 'Visual');
 const visualQuantity = visual.length;
 
 const hearing = employees.filter(
-  (employee) => employee.deficiency === "Auditiva"
+  (employee) => employee.deficiency === 'Auditiva',
 );
 const hearingQuantity = hearing.length;
 
 const physical = employees.filter(
-  (employee) => employee.deficiency === "Física"
+  (employee) => employee.deficiency === 'Física',
 );
 const physicalQuantity = physical.length;
 
 const intellectual = employees.filter(
-  (employee) => employee.deficiency === "Intelectual"
+  (employee) => employee.deficiency === 'Intelectual',
 );
 const intellectualQuantity = intellectual.length;
 
 const otherDeficiency = employees.filter(
-  (employee) => employee.deficiency === "Outra"
+  (employee) => employee.deficiency === 'Outra',
 );
 const otherDeficiencyQuantity = otherDeficiency.length;
 
 export default function Data() {
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
-      listEmployee().then((list) => {
-        const newEmployees = [];
-        list.forEach((doc) => {
-          newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
-        });
-        setEmployees(newEmployees);
+    listEmployee().then((list) => {
+      const newEmployees = [];
+      list.forEach((doc) => {
+        newEmployees.push({ ...doc.data(), id: doc.id, details: 'Mais' });
       });
-    }, []);
+      setEmployees(newEmployees);
+    });
+  }, []);
 
   return (
     <>
-      <div style={{ display: "flex", maxWidth: 900 }}>
-        <div>
+      <Header name="Nossos Dados" />
+      <div className="container-title">
+        <h2 className="title-data">Veja as estatísticas:</h2>
+      </div>
+      <div
+        style={{ display: 'flex', maxWidth: 1200 }}
+        className="container-charts">
+        <div className="chartBox">
           <Pie
             data={{
               datasets: [
@@ -200,16 +207,16 @@ export default function Data() {
                   // cria-se um vetor data, com os valores a ser dispostos no gráfico
                   data: [femaleQuantity, maleQuantity],
                   // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
-                  backgroundColor: ["rgba(75, 192, 192)", "rgba(54, 162, 235)"],
+                  backgroundColor: ['#78C0B3', '#404040'],
                 },
               ],
               // cria-se legendas para os respectivos valores do vetor data
-              labels: ["Mulheres", "Homens"],
+              labels: ['Mulheres', 'Homens'],
             }}
             height={250}
             width={350}
             options={{
-              maintainAspectRatio: false,
+              maintainAspectRatio: true,
               scales: {
                 yAxes: [
                   {
@@ -224,11 +231,18 @@ export default function Data() {
                   fontSize: 25,
                 },
               },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Gênero',
+                  color: '#285035',
+                },
+              },
             }}
           />
         </div>
 
-        <div>
+        <div className="chartBox">
           <Doughnut
             data={{
               datasets: [
@@ -244,29 +258,29 @@ export default function Data() {
                   ],
                   // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
                   backgroundColor: [
-                    "rgba(255, 99, 132, 0.4)",
-                    "rgba(54, 162, 235, 0.4)",
-                    "rgba(255, 206, 86, 0.4)",
-                    "rgba(75, 192, 192, 0.4)",
-                    "rgba(153, 102, 255, 0.4)",
-                    "rgba(255, 159, 64, 0.4)",
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(255, 159, 64, 0.4)',
                   ],
                 },
               ],
               // cria-se legendas para os respectivos valores do vetor data
               labels: [
-                "Amarela",
-                "Branca",
-                "Indígena",
-                "Parda",
-                "Preta",
-                "Outra",
+                'Amarela',
+                'Branca',
+                'Indígena',
+                'Parda',
+                'Preta',
+                'Outra',
               ],
             }}
             height={250}
             width={350}
             options={{
-              maintainAspectRatio: false,
+              maintainAspectRatio: true,
               scales: {
                 yAxes: [
                   {
@@ -281,16 +295,23 @@ export default function Data() {
                   fontSize: 25,
                 },
               },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Cor ou raça',
+                  color: '#285035',
+                },
+              },
             }}
           />
         </div>
 
-        <div>
+        <div className="chartBox">
           <Bar
             data={{
               datasets: [
                 {
-                  label: "Número de colaboradores",
+                  label: ['Número de colaboradores'],
                   // cria-se um vetor data, com os valores a ser dispostos no gráfico
                   data: [
                     noDeficiencyQuantity,
@@ -302,30 +323,30 @@ export default function Data() {
                   ],
                   // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
                   backgroundColor: [
-                    "rgba(255, 99, 132)",
-                    "rgba(54, 162, 235)",
-                    "rgba(255, 206, 86)",
-                    "rgba(75, 192, 192)",
-                    "rgba(153, 102, 255)",
-                    "rgba(255, 159, 64)",
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 99, 132)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(153, 102, 255)',
+                    'rgba(255, 159, 64)',
                   ],
                 },
               ],
               // cria-se legendas para os respectivos valores do vetor data
               labels: [
-                "Nenhuma",
-                "Visual",
-                "Auditiva",
-                "Física",
-                "Intelectual",
-                "Outra",
+                'Nenhuma',
+                'Visual',
+                'Auditiva',
+                'Física',
+                'Intelectual',
+                'Outra',
               ],
             }}
-            height={250}
-            width={350}
+            height={600}
+            width={600}
             options={{
-              maintainAspectRatio: false,
-              indexAxis: "y",
+              maintainAspectRatio: true,
+              indexAxis: 'y',
               scales: {
                 yAxes: [
                   {
@@ -338,6 +359,13 @@ export default function Data() {
               legend: {
                 labels: {
                   fontSize: 25,
+                },
+              },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Deficiências',
+                  color: '#285035',
                 },
               },
             }}
@@ -440,7 +468,6 @@ export default function Data() {
             legend: 'none',
           }} /> */}
       </div>
-
     </>
   );
 }
