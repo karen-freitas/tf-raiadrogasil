@@ -12,9 +12,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-
 export default function Register() {
-  const [showModal, setShowModal] = useState(false);
   const [valuesError, setValuesError] = useState({});
 
   const [values, setValues] = useState({
@@ -85,10 +83,16 @@ export default function Register() {
   const register = () => {
     if (isFormValid()) {
       registerEmployee(values)
-        .then(() => setShowModal(true))
-        .catch((error) => alert(error.message));
+        .then(() => {
+          setShowModalValidForm(true);
+        })
+        .catch(() => {
+          setPopUpText('Não foi possível realizar o cadastro');
+          setShowModalInvalidForm(true);
+        });
     } else {
-      alert('Formulário precisa ser válido');
+      setPopUpText('Formulário precisa ser válido');
+      setShowModalInvalidForm(true);
     }
   };
 
@@ -332,10 +336,15 @@ export default function Register() {
       </Stack>
 
       <BasicModal
-        showModal={showModal}
-        setShowModal={setShowModal}
+        showModal={showModalValidForm}
+        setShowModal={setShowModalValidForm}
         popupText="Cadastro realizado com sucesso!"
         onClick={routerHome}
+      />
+      <BasicModal
+        showModal={showModalInvalidForm}
+        setShowModal={setShowModalInvalidForm}
+        popupText={popUpText}
       />
     </>
   );
