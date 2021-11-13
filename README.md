@@ -6,6 +6,7 @@ O desafio proposto pela empresa RaiaDrogasil era desenvolver um sistema de gest�
 
 ## Tecnologias Utilizadas
 
+| Ferramenta | Descrição |
 | --- | --- |
 | `React` | Uma biblioteca JavaScript para criar interfaces de usuário |
 | `HTML 5` | Linguagem de marcação |
