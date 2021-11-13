@@ -1,6 +1,6 @@
 # Sistema de Gestão de pessoas
 
-Aplicação criada para o Talent Fest, um Hackaton de 3 dias organizado pelo bootcamp da Laboratória.
+Aplicação criada para o Talent Fest, um Hackathon de 3 dias organizado pelo bootcamp da Laboratória.
 
 O desafio proposto pela empresa RaiaDrogasil era desenvolver um sistema de gestão de pessoas, para cadastro e gerenciamento de dados dos colaboradores.
 
